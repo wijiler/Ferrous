@@ -18,7 +18,7 @@ if args.len() == 1 {
 }
 
 fn print_help () {
-const VERSION: &'static str = env!("CARGO_PKG_VERSION");
+const VERSION: Option<&'static str> = option_env!("CARGO_PKG_VERSION");
 
 println!("{}", 
         format!(
@@ -34,7 +34,7 @@ println!("{}",
             compile and run a .ferric file! or just compile (WIP)
 
 
-            ", VERSION
+            ", VERSION.unwrap_or("unknown")
             ) 
         );
 
