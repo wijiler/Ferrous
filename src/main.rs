@@ -22,6 +22,7 @@ if args.len() == 1 {
 }
 
 fn version() {
+const VERSION: Option<&'static str> = option_env!("CARGO_PKG_VERSION");
 println!("{}",
          format!(r"
                 oxide version {}
@@ -29,8 +30,7 @@ println!("{}",
 }
 
 fn print_help () {
-pub const VERSION: Option<&'static str> = option_env!("CARGO_PKG_VERSION");
-
+const VERSION: Option<&'static str> = option_env!("CARGO_PKG_VERSION");
 println!("{}", 
         format!(
             r"ferric {}
