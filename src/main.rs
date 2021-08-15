@@ -25,7 +25,7 @@ fn version() {
 const VERSION: Option<&'static str> = option_env!("CARGO_PKG_VERSION");
 println!("{}",
          format!(r"
-                ferric version {}
+                ferric ver {}
                  ",VERSION.unwrap_or("unknow ver")))
 }
 
