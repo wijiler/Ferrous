@@ -1,5 +1,5 @@
-#[path = "./token.rs"]pub mod tokens;
+pub mod token;
 
-fn main () {
+use token::Tokens;
 
-}
+
