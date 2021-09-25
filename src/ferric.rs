@@ -25,7 +25,7 @@ fn version() {
 const VERSION: Option<&'static str> = option_env!("CARGO_PKG_VERSION");
 println!("{}",
          format!(r"
-               your ferric version {}
+your ferric version {}
                  ",VERSION.unwrap_or("unknow ver")))
 }
 
@@ -33,18 +33,16 @@ fn print_help () {
 const VERSION: Option<&'static str> = option_env!("CARGO_PKG_VERSION");
 println!("{}", 
         format!(
-            r"ferric {}
+r"ferric {}
             
-            USAGE:
-            ferric [FILE] [ARGS]
-            
-            FLAGS:
-            -h show this help screen!
+USAGE:
+ferric [FILE] [ARGS]
 
-            ARGS:
-            compile and run a .ferric file! or just compile (WIP)
+FLAGS:
+-h show this help screen!
 
-
+ARGS:
+compile and run a .ferric file! or just compile (WIP)
             ", VERSION.unwrap_or("unknown ver")
             ) 
         );
