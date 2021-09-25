@@ -2,10 +2,12 @@
 
 ### A language packed with iron
 
+## Plans
 | Plans | Status |
 | ----- | ------ |
 | tokens | 🗸 |
 | compiler | ✎ |
-| optimize | 𐄂 |
+| optimize | 𐄂  for the future|
 
-:D
+# Aims
+this language aims to be fast, general purpose, and simple
