@@ -1,7 +1,6 @@
 /// ferriclang's first line :)
 use std::{env, process};
-#[path = "./lexer/lexer.rs"]mod lexer;
-#[path = "./lexer/token.rs"]mod tokens;
+
 fn main() {
 let args: Vec<String> = env::args().collect();
 if args.len() == 1 {
