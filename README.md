@@ -2,4 +2,10 @@
 
 ### A language packed with iron
 
+| Plans | Status |
+| ----- | ------ |
+| tokens | 🗸 |
+| compiler | ✎ |
+| optimize | 𐄂 |
 
+:D
