@@ -1,6 +1,14 @@
 /// ferriclang's first line :)
 use std::{env, process};
 
+mod compiler {
+   pub mod comp;
+}
+mod lexer {
+   pub mod token;
+    pub use self::token::*;
+}
+
 fn main() {
 let args: Vec<String> = env::args().collect();
 if args.len() == 1 {
