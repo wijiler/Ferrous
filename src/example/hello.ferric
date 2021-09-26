@@ -1,0 +1,14 @@
+func hello( mut x = int mut y = int ) {
+    x = 5;
+    y = 6;
+    int z = x + y;
+    print: (z,"is a cool number");
+}
+
+// main is a special keyword, if it is present it will only run whatevers in there if not you can declare the main function using exclamation marks i.e
+// !!thisisamainfunction or if you wnat functions that are not devlared in main to run despite not being in main function you would use one ! i.e
+// func !randomfunction
+main () {
+    hello();
+    print: ("hello ferric");
+} 

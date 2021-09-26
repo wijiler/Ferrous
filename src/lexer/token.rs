@@ -1,7 +1,7 @@
 use std::fmt;
 #[derive(Debug, Copy, Clone, PartialEq)]
 pub enum Tokens {
-   // tokens
+   // Symbol
     Plus,
     Lparen,
     Rparen,
@@ -12,8 +12,9 @@ pub enum Tokens {
     Lbrack,
     RCbrack,
     LCbrack,
+    
 
-    // types
+    // Identifier
     Int,
     Float,
     Bool,
@@ -22,9 +23,14 @@ pub enum Tokens {
     Fn,
     String,
 
+    // Literals
+    Literal(Literals),
 }
 
-
+pub enum Literals {
+    Str(String),
+    Int(i64),
+}
 
 impl Tokens {
     pub fn value(&self) -> Option<&'static str> {
@@ -47,6 +53,8 @@ impl Tokens {
         Self::False => Some("false"),
         Self::Fn => Some("func"),
         Self::String => None,
+
+        Self::Literal => None,
         }
     }
 }
