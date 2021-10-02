@@ -5,7 +5,7 @@
 ## Plans
 | Plans | Status |
 | ----- | ------ |
-| tokens | 🗸 |
+| lexing | ✎ |
 | compiler | ✎ |
 | optimize | 𐄂  for the future|
 
