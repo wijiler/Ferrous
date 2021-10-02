@@ -1,4 +1,7 @@
 use std::fmt;
+use std::collections::HashMap;
+
+
 #[derive(Debug, Copy, Clone, PartialEq)]
 pub enum Tokens {
    // Symbol
@@ -12,7 +15,14 @@ pub enum Tokens {
     Lbrack,
     RCbrack,
     LCbrack,
-    
+    GT,
+    LT,
+    OArrowfunc,
+    CArrowfunc,
+    GTET,
+    ETLT,
+    Equals,
+    Minus,
 
     // Identifier
     Int,
@@ -23,17 +33,15 @@ pub enum Tokens {
     Fn,
     String,
 
-    // Literals
-    Literal(Literals),
 }
 
-pub enum Literals {
-    Str(String),
-    Int(i64),
-}
+
 
 impl Tokens {
-    pub fn value(&self) -> Option<&'static str> {
+    pub fn value(&self) -> Option<&'static str> { 
+        
+
+
         match self {
         Self::Plus => Some("+"),
         Self::Lparen => Some("("),
@@ -45,6 +53,14 @@ impl Tokens {
         Self::Lbrack => Some("["),
         Self::RCbrack => Some("}"),
         Self::LCbrack => Some("{"),
+        Self::GT => Some(">"),
+        Self::LT => Some("<"),
+        Self::OArrowfunc => Some("<("),
+        Self::CArrowfunc => Some(")>"),
+        Self::GTET => Some(">="),
+        Self::LTET => Some("<="),
+        Self::Equals => Some("="),
+        Self::Minus => Some("-"),
 
         Self::Int => Some("int"),
         Self::Float => Some("float"),
@@ -54,10 +70,12 @@ impl Tokens {
         Self::Fn => Some("func"),
         Self::String => None,
 
-        Self::Literal => None,
         }
     }
 }
+
+
+
 impl fmt::Display for Tokens {
 fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
     write!(f, "{}", self.value().unwrap_or(""))

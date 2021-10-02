@@ -3,6 +3,7 @@ use std::{env, process};
 
 mod compiler {
    pub mod comp;
+   pub use self::comp::comp;
 }
 mod lexer {
    pub mod token;
@@ -23,6 +24,9 @@ if args.len() == 1 {
         "-v" | "--version" => {
         version();
         process::exit(0);
+        }
+        "--test" | "-t" => {
+            compiler::comp::comp();
         }
     _ => {}
     }
