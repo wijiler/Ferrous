@@ -1,5 +1,4 @@
 use std::fmt;
-use std::collections::HashMap;
 
 
 #[derive(Debug, Copy, Clone, PartialEq)]
@@ -20,7 +19,7 @@ pub enum Tokens {
     OArrowfunc,
     CArrowfunc,
     GTET,
-    ETLT,
+    LTET,
     Equals,
     Minus,
 

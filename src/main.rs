@@ -1,4 +1,4 @@
-/// ferriclang's first line :)
+/// ferriclang's first line :) penis
 use std::{env, process};
 
 mod compiler {
@@ -29,7 +29,7 @@ if args.len() == 1 {
             compiler::comp::comp();
         }
     _ => {}
-    }
+   }
 }
 
 fn version() {
