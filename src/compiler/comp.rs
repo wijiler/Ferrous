@@ -11,7 +11,7 @@ pub fn find_file() -> Result<()> {
     filename.to_string();
     filename.pop();
 
-    let finalfilename = filename + ".ferric";
+    let mut finalfilename = filename + ".ferric";
     finalfilename.pop();
     Ok(())
 }
