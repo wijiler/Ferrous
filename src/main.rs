@@ -1,50 +1,57 @@
 /// ferriclang's first line :) penis
 use std::{env, process};
 
+// imports
 mod compiler {
-   pub mod comp;
-   pub use self::comp::comp;
+    pub mod comp;
+    pub use self::comp::comp;
 }
 mod lexer {
-   pub mod token;
+    pub mod token;
     pub use self::token::*;
 }
-
+// args handler so you can use the thing
 fn main() {
-let args: Vec<String> = env::args().collect();
-if args.len() == 1 {
-    println!("ARGS not applied");
-    process::exit(1);
+    let args: Vec<String> = env::args().collect();
+    if args.len() == 1 {
+        println!("ARGS not applied");
+        process::exit(1);
     }
     match args[1].as_str() {
-    "-h" | "--help" => {
-        print_help();
-        process::exit(0);
+        "-h" | "--help" => {
+            print_help();
+            process::exit(0);
         }
         "-v" | "--version" => {
-        version();
-        process::exit(0);
+            version();
+            process::exit(0);
         }
         "--test" | "-t" => {
             compiler::comp::comp();
         }
-    _ => {}
-   }
+        _ => {}
+    }
 }
-
+// prints the version
 fn version() {
-const VERSION: Option<&'static str> = option_env!("CARGO_PKG_VERSION");
-println!("{}",
-         format!(r"
-your ferric version {}
-                 ",VERSION.unwrap_or("unknow ver")))
-}
-
-fn print_help () {
-const VERSION: Option<&'static str> = option_env!("CARGO_PKG_VERSION");
-println!("{}", 
+    const VERSION: Option<&'static str> = option_env!("CARGO_PKG_VERSION");
+    println!(
+        "{}",
         format!(
-r"ferric {}
+            r"
+your ferric version {}
+                 ",
+            VERSION.unwrap_or("unknow ver")
+        )
+    )
+}
+// help cuz help
+fn print_help() {
+    const VERSION: Option<&'static str> = option_env!("CARGO_PKG_VERSION");
+    println!(
+        "{}",
+        format!(
+            r"ferric {}
             
 USAGE:
 ferric [FILE] [ARGS]
@@ -54,9 +61,8 @@ FLAGS:
 
 ARGS:
 compile and run a .ferric file! or just compile (WIP)
-            ", VERSION.unwrap_or("unknown ver")
-            ) 
-        );
-
+            ",
+            VERSION.unwrap_or("unknown ver")
+        )
+    );
 }
-
