@@ -10,4 +10,4 @@
 | optimize | 𐄂  for the future|
 
 # Aims
-this language aims to be fast, general purpose, and simple
+this language aims to be fast, general purpose, and epic
