@@ -2,6 +2,7 @@
 use std::{env, process};
 
 // imports
+mod token;
 // args handler so you can use the thing
 fn main() {
     let args: Vec<String> = env::args().collect();
