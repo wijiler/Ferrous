@@ -1,3 +1,4 @@
+
 use std::fmt;
 
 #[derive(Debug, Copy, Clone, PartialEq)]
@@ -66,8 +67,14 @@ impl Tokens {
     }
 }
 
+// make it so it can print out
 impl fmt::Display for Tokens {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", self.value().unwrap_or(""))
     }
+}
+
+fn tokenize(file: String) {
+}
+    
 }

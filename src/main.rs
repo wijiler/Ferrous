@@ -1,15 +1,7 @@
-/// ferriclang's first line :) penis
+/// ferriclang's first line :) 
 use std::{env, process};
 
 // imports
-mod compiler {
-    pub mod comp;
-    pub use self::comp::comp;
-}
-mod lexer {
-    pub mod token;
-    pub use self::token::*;
-}
 // args handler so you can use the thing
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -27,7 +19,6 @@ fn main() {
             process::exit(0);
         }
         "--test" | "-t" => {
-            compiler::comp::comp();
         }
         _ => {}
     }
@@ -55,10 +46,8 @@ fn print_help() {
             
 USAGE:
 ferric [FILE] [ARGS]
-
 FLAGS:
 -h show this help screen!
-
 ARGS:
 compile and run a .ferric file! or just compile (WIP)
             ",
