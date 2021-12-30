@@ -9,12 +9,19 @@ enum tokentype {
     Return,   // return duh :p
 }
 enum token {
-    Ttype(tokentype),
-    Structure, // depends on the token type see EXAMPLES/TOKENIZATION
+    Ttype(),
+    Structure, // depends on the token type see Docs/tokenization.md
 }
 impl token {
-    fn newtoken(tt : tokentype) {
-        
+    fn new(tt : tokentype) -> token {
+        match tt {
+            tokentype::Id => token {
+                Ttype(tokentype::Id),
+                Structure {
+                    Name:String,
+                },
+            }
+        }
     }
 }
 fn tokenize(file: String) {
