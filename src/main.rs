@@ -1,4 +1,4 @@
-/// ferriclang's first line :) 
+/// ferriclang's first line :)
 use std::{env, process};
 
 // imports
@@ -19,8 +19,7 @@ fn main() {
             version();
             process::exit(0);
         }
-        "--test" | "-t" => {
-        }
+        "--test" | "-t" => {}
         _ => {}
     }
 }
