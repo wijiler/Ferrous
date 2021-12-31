@@ -9,14 +9,21 @@ enum tokentype {
     Return,   // return duh :p
 }
 
+
+
 enum structures {
     Id{
-        
+    Name:String,
+    },
+    Notation{
+    a: i128,
+    operation:Option<char>,
+    b: i128,
     },
 }
 
 struct token {
-    ttype: tokentype,
+    ttype: Option<tokentype>,
     structure:, // depends on the token type see Docs/tokenization.md
 }
 impl token {
@@ -25,7 +32,7 @@ impl token {
 }
 fn tokenize(file: String) {
     let wssfile = file.replace(" ", "");
-    for ct in wssfile.chars().next() {
+    for ct in wssfile.chars().next() { 
         if ct == '+' {}
     }
 }
