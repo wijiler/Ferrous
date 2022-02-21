@@ -1,9 +1,3 @@
----
-title: Ferriclang notes
-created: '2022-02-21T17:22:00.978Z'
-modified: '2022-02-21T18:03:43.621Z'
----
-
 # Ferriclang notes
 
 ## Sectoring
