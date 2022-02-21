@@ -2,8 +2,8 @@
 use std::{env, process};
 
 // imports
-mod token;
-mod tokentypes;
+pub mod token;
+pub mod tokentypes;
 // args handler so you can use the thing
 fn main() {
     let args: Vec<String> = env::args().collect();

@@ -1,4 +1,4 @@
-use token::Token;
+use crate::token::Token;
 struct Args {
 tokentype:Token,
 id:String,
@@ -6,6 +6,6 @@ id:String,
 
 pub struct Func {
     id:String,
-    args:Args,
+    args:Box<Args>,
     contents:String,
 }
