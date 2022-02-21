@@ -6,8 +6,8 @@
 | Plans | Status |
 | ----- | ------ |
 | lexing | ✎ |
-| compiler | ✎ |
-| optimize | 𐄂  for the future|
+| compiler |x|
+| optimize |x|for the future|
 
 # Aims
 this language aims to be fast, general purpose, and epic
