@@ -3,10 +3,7 @@ use std::{env, process};
 
 // imports
 mod token;
-<<<<<<< HEAD
-=======
 mod tokentypes;
->>>>>>> 6ec8c0a (Sectors)
 // args handler so you can use the thing
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -23,14 +20,10 @@ fn main() {
             version();
             process::exit(0);
         }
-<<<<<<< HEAD
-        "--test" | "-t" => {}
-=======
         "--comp" | "-c" => {
         let mut filename = &args[2].to_string();
         token::tokenize(filename);
         }
->>>>>>> 6ec8c0a (Sectors)
         _ => {}
     }
 }
