@@ -21,7 +21,7 @@ fn main() {
             process::exit(0);
         }
         "--comp" | "-c" => {
-        let mut filename = &args[2].to_string();
+        let filename = &args[2].to_string();
         token::tokenize(filename);
         }
         _ => {}

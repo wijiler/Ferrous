@@ -9,8 +9,9 @@ pub enum Token {
     Literal,  // "s"
     Str,      // "foo"
     Char,     // 's'
-    Function(Func), // fn main(args here) { -_- code *-* }
+    Function(&'static Func), // fn main(args here) { -_- code *-* }
     Return,   // return duh
+    Keyword,
 }
 pub fn tokenize(filename:&String) {
     let mut contents = fs::read_to_string(filename)
