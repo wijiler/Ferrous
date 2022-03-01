@@ -4,6 +4,8 @@ use std::{env, process};
 // imports
 pub mod token;
 pub mod tokentypes;
+pub mod sector;
+pub mod keyword;
 // args handler so you can use the thing
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -52,8 +54,10 @@ USAGE:
 ferric [FILE] [ARGS]
 FLAGS:
 -h show this help screen!
-ARGS:
-compile and run a .ferric file! or just compile (WIP)
+-v show version
+-c compile
+What Does this tool do?:
+allows you to compile .fr or .ferric files
             ",
             VERSION.unwrap_or("unknown ver")
         )

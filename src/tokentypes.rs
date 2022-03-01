@@ -1,9 +1,12 @@
 use crate::token::Token;
-struct Args {
+/* uncomment if you get some errors related to this
+struct Argssector {
+new:char,
 ttype:Option<Token>,
 id:String,
+end:char,
 }
-// sector stuff will relocate to another file
+
 struct Subsector {
 contents:Option<Token>,
 end:char,
@@ -15,17 +18,12 @@ contents:&'static [String],
 subsectors:&'static [i64],
 end:char,
 }
-
-struct Argssector { 
-new:char,
-contents:Args,
-end:char,
-}
-
+*/
+use crate::sector::{Sector,Subsector,Argssector};
 pub struct Func {
 start:Sector,
 id:String,
-args:Argssector,
+args:Option<Argssector>,
 contents:Subsector,
 }
 
@@ -33,5 +31,7 @@ contents:Subsector,
 
 pub struct Keywrd {
 id:String,
+does:Option<T>, // TODO
+args:Option<Argssector>,
 
 }
