@@ -1,4 +1,3 @@
-use crate::token::Token;
 /* uncomment if you get some errors related to this
 struct Argssector {
 new:char,
@@ -31,7 +30,14 @@ contents:Subsector,
 
 pub struct Keywrd {
 id:String,
-does:Option<T>, // TODO
+// TODO does:
 args:Option<Argssector>,
-
+end:char,
 }
+
+pub struct Notate {
+    a:i64,
+    operation:char,
+    b:i64,
+}
+

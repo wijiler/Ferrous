@@ -2,7 +2,7 @@ use std::fs;
 use crate::tokentypes::*;
 pub enum Token {
     Id(String),       // foo
-    Notation, // 1 + 1
+    Notation(Notate), // 1 + 1
     Int(i64), // 123
     Float(f64), // 1.23
     Uint(u64),
