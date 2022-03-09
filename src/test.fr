@@ -1,6 +1,9 @@
-test123 + test is this working?
-sadfsdfasdfadfasdf
+func sayWhatGilbertIs(Something) {
 
-		sdfsdfsdf
+	printnl(Something);
+}
 
-asdasd
+!!main () {
+ printnl("Gilbert");
+ sayWhatGilbertIs("Is my snake");
+}

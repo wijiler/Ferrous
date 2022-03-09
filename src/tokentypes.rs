@@ -41,4 +41,6 @@ pub struct Notate {
     b:i64,
 }
 
-
+pub struct Rtrn {
+    value:Argssector,
+}

@@ -1,8 +1,7 @@
 use crate::token::Token;
 pub struct Argssector {
 new:char,
-ttype:Option<Token>,
-id:String,
+contents:Token,
 end:char,
 }
 
