@@ -1,9 +1,21 @@
 use crate::token::Token;
 pub struct Argssector {
 new:char,
-contents:Token,
+contents:[Token;18446744073709551615],
+seperation:char,
 end:char,
 }
+
+impl Argssector {
+         fn new(tokens:[Token;18446744073709551615]) -> Self {
+            Self {
+                new:'(',
+                contents:tokens,
+                seperation:',',
+                end:')',
+            }
+        }
+    }
 
 pub struct Subsector {
 contents:Option<Token>,
