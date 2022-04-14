@@ -3,9 +3,6 @@ use std::{env, process};
 
 // imports
 pub mod token;
-pub mod tokentypes;
-pub mod sector;
-pub mod keyword;
 // args handler so you can use the thing
 fn main() {
     let args: Vec<String> = env::args().collect();
