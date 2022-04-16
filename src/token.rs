@@ -1,13 +1,42 @@
+
+
 enum TokenType {
+// Gates
+Or = '|', // Im too lazy to give these numbers because I forgot them so the file will just have random characters in it lol
+Not = '~',
+XOr = '^',
+And = '&',
 
-Ident = 256, // Get used to these numbers because afterlexing the parsers gonna have to parse this
 
-// basic types
-Type_String,
-Type_Bool,
-Type_Int,
-Type_Uint,
-Type_Char,
+Identifier = 0, // Get used to these numbers because after lexing the parsers gonna have to parse this
+STRING = 1,
+Int = 2,
+
+
+// keywords
+Res_Bool = 5,
+Res_Int = 6,
+Res_Uint = 7,
+Res_Char = 8,
+Res_String = 9,
+
+// symbols and operators
+Bang = 10,
+Larrow = 11,
+Rarrow = 12,
+LParen = 13,
+Rparen = 14,
+Equal = 15,
+Add = 16,
+Subtract = 17,
+Multiply = 18,
+Divide = 19,
+Modulo = 20,
+
+// seperators
+SemiColon = 21,
+Colon = 22,
+Comma=23,
 }
 
 
@@ -82,5 +111,3 @@ Type_Char,
 
 }
 */
-struct Container /*aka function*/ {} //TODO!!!
-
