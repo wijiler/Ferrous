@@ -21,7 +21,7 @@ fn main() {
         }
         "--comp" | "-c" => {
         let filename = &args[2].to_string();
-        token::tokenize(filename);
+        println!("oops I havent implemented this");
         }
         _ => {}
     }

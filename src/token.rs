@@ -1,19 +1,26 @@
-/*use std::fs;
-pub fn tokenize(filename:&String) {
-    let mut contents = fs::read_to_string(filename)
-        .expect("Something went wrong reading please try again");
-    // check if file is a ferriclang file
-    let mut extension: String = filename.chars().rev().take(2).collect();
-    extension = extension.pop().unwrap().to_string() + &extension;
-    if extension != "fr" {
-       panic!("not a .fr file please try again"); 
-    }
-    contents.retain(|c| !c.is_whitespace());
-   println!("File contents:\n{}",contents);
-}*/
-struct token {
-    value:char,
+enum TokenType {
+
+Ident = 256, // Get used to these numbers because afterlexing the parsers gonna have to parse this
+
+// basic types
+Type_String,
+Type_Bool,
+Type_Int,
+Type_Uint,
+Type_Char,
 }
+
+
+
+
+
+
+
+
+
+
+
+// old code that would never work
 /*
         TOKEN_ADD,
         TOKEN_SUBTRACT,
@@ -28,7 +35,7 @@ struct token {
         TOKEN_COMMA,
         TOKEN_COLON,
 */
-impl token {
+/*impl token {
  fn new(v:char) -> Self {
     Self {value:v,}
  }
@@ -74,6 +81,6 @@ impl token {
  }
 
 }
-
-
+*/
+struct Container /*aka function*/ {} //TODO!!!
 
