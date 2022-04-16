@@ -62,11 +62,11 @@ impl token {
  }
 
  fn s_comma() {
-    token::new(':');
+    token::new(',');
  }
 
  fn s_colon() {
-    token::new(';');
+    token::new(':');
  }
 
  fn s_semi() {
@@ -74,3 +74,6 @@ impl token {
  }
 
 }
+
+
+
