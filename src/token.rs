@@ -1,5 +1,3 @@
-
-
 enum TokenType {
 // Gates
 Or = '|', // Im too lazy to give these numbers because I forgot them so the file will just have random characters in it lol
@@ -19,6 +17,11 @@ Res_Int = 6,
 Res_Uint = 7,
 Res_Char = 8,
 Res_String = 9,
+Res_Float = 28,
+Res_If = 24,
+Res_Else = 26,
+Res_Switch = 25,
+Res_type = 27,
 
 // symbols and operators
 Bang = 10,
@@ -37,17 +40,18 @@ Modulo = 20,
 SemiColon = 21,
 Colon = 22,
 Comma=23,
+
 }
 
+union Tokenvalue {
+    Boolval:bool,    
+    Intval:i64,    
+    Floatval:f64,    
+    UIntval:u64,
+}
 
-
-
-
-
-
-
-
-
+struct Token {
+}
 
 // old code that would never work
 /*
