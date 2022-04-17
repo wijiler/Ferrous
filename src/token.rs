@@ -1,9 +1,9 @@
 enum TokenType {
 // Gates
-Or = '|', // Im too lazy to give these numbers because I forgot them so the file will just have random characters in it lol
-Not = '~',
-XOr = '^',
-And = '&',
+Or = 29, // Im too lazy to give these numbers because I forgot them so the file will just have random characters in it lol
+Not = 30,
+XOr = 31,
+And = 32,
 
 
 Identifier = 0, // Get used to these numbers because after lexing the parsers gonna have to parse this
@@ -22,6 +22,9 @@ Res_If = 24,
 Res_Else = 26,
 Res_Switch = 25,
 Res_type = 27,
+
+True = 33,
+False = 34,
 
 // symbols and operators
 Bang = 10,
@@ -43,14 +46,18 @@ Comma=23,
 
 }
 
-union Tokenvalue {
-    Boolval:bool,    
-    Intval:i64,    
-    Floatval:f64,    
-    UIntval:u64,
+enum Tokenvalue {
+    Boolval(bool),    
+    Intval(i64),    
+    Floatval(f64),    
+    UIntval(u64),
+    CharVal(char),
+    StringVal{count:u64, data:String},
 }
 
 struct Token {
+    Type:TokenType,
+    value:Tokenvalue,
 }
 
 // old code that would never work
