@@ -1,12 +1,12 @@
 enum TokenType {
 // Gates
-Or = 29, // Im too lazy to give these numbers because I forgot them so the file will just have random characters in it lol
+Or = 29, 
 Not = 30,
 XOr = 31,
 And = 32,
 
 
-Identifier = 0, // Get used to these numbers because after lexing the parsers gonna have to parse this
+Identifier = 0,
 STRING = 1,
 Int = 2,
 
@@ -22,6 +22,7 @@ Res_If = 24,
 Res_Else = 26,
 Res_Switch = 25,
 Res_type = 27,
+Res_Function = 35,
 
 True = 33,
 False = 34,
@@ -52,7 +53,10 @@ enum Tokenvalue {
     Floatval(f64),    
     UIntval(u64),
     CharVal(char),
-    StringVal{count:u64, data:String},
+    StringVal{count:u64, data:String}, // make it easier to get the length
+    FunctionVal{args:[&'static Tokenvalue;256], contents:TokenType},
+    IfVal{condition:bool,doesoncondition:TokenType},
+    ElseVal{does:TokenType},
 }
 
 struct Token {
