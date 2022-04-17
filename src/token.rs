@@ -57,6 +57,7 @@ enum Tokenvalue {
     FunctionVal{args:[&'static Tokenvalue;256], contents:TokenType},
     IfVal{condition:bool,doesoncondition:TokenType},
     ElseVal{does:TokenType},
+    Identifier(String),
 }
 
 struct Token {
