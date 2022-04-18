@@ -1,5 +1,5 @@
 /// ferriclang's first line :)
-use std::{env, process};
+use std::{env, process,fs};
 
 // imports
 pub mod token;
@@ -21,8 +21,10 @@ fn main() {
             process::exit(0);
         }
         "--comp" | "-c" => {
-        let filename = &args[2].to_string();
-        println!("oops I havent implemented this");
+        let filename = &args[2];
+        let file = fs::read_to_string(filename).unwrap(); 
+        let mut lexer = lexer::lexer::new(file);
+        lexer.lex();
         }
         _ => {}
     }

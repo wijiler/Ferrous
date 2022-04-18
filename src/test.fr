@@ -3,7 +3,7 @@ func sayWhatGilbertIs(Something) {
 	printnl(Something);
 }
 
-!!main () {
+func !! main () {
  printnl("Gilbert");
  sayWhatGilbertIs("Is my snake");
 }

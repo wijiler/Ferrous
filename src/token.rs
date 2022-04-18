@@ -1,3 +1,4 @@
+#[derive(Debug)]
 pub enum TokenType {
 // Gates
 Or = 29, 
@@ -46,7 +47,7 @@ Colon = 22,
 Comma=23,
 
 }
-
+/*
 pub enum Tokenvalue {
     Boolval(bool),    
     Intval(i64),    
@@ -57,18 +58,20 @@ pub enum Tokenvalue {
     FunctionVal{args:[&'static Tokenvalue;256], contents:TokenType},
     IfVal{condition:bool,doesoncondition:TokenType},
     ElseVal{does:TokenType},
+    Operator{},
     Identifier(String),
 }
-
+*/
+#[derive(Debug)]
 pub struct Token {
     Type:TokenType,
-    value:Tokenvalue,
+    as_literal:String,
 }
 impl Token {
-pub fn new(t:TokenType,v:Tokenvalue) -> Self {
+pub fn new(t:TokenType,a:String) -> Self {
             Self {
                 Type:t,
-                value:v,
+                as_literal:a,
             }
     }
 }
