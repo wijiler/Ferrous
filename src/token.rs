@@ -1,4 +1,4 @@
-enum TokenType {
+pub enum TokenType {
 // Gates
 Or = 29, 
 Not = 30,
@@ -47,7 +47,7 @@ Comma=23,
 
 }
 
-enum Tokenvalue {
+pub enum Tokenvalue {
     Boolval(bool),    
     Intval(i64),    
     Floatval(f64),    
@@ -60,11 +60,18 @@ enum Tokenvalue {
     Identifier(String),
 }
 
-struct Token {
+pub struct Token {
     Type:TokenType,
     value:Tokenvalue,
 }
-
+impl Token {
+pub fn new(t:TokenType,v:Tokenvalue) -> Self {
+            Self {
+                Type:t,
+                value:v,
+            }
+    }
+}
 // old code that would never work
 /*
         TOKEN_ADD,
