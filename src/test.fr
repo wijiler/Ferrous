@@ -7,3 +7,6 @@ func !! main () {
  printnl("Gilbert");
  sayWhatGilbertIs("Is my snake");
 }
+ func foo () {
+ 	String Gilbert = "snek";
+ }

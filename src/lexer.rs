@@ -27,8 +27,26 @@ use crate::token::*;
                             if nextchars == ['f','u','n','c'] {
                                 tokens.push(Token::new(TokenType::Res_Function,"func".to_owned()));
                             }
+                            else  {
+                                while self.get_current_char().is_alphabetic() {
+                                    nextchars.push(self.get_current_char())
+                                }
+                                tokens.push(Token::new(TokenType::Identifier,nextchars.into_iter().collect()));
+                            }
                       },  
-                        _ => (),
+                      '\"' => {
+                          self.counter += 1;
+                        let mut nextchars:Vec<char> = Vec::<char>::new();
+                        while self.get_current_char() != '\"' {
+                            nextchars.push(self.get_current_char());
+                            self.counter += 1;
+                        }
+                        tokens.push(Token::new(TokenType::STRING,nextchars.into_iter().collect()));
+                      },
+                      '=' => {
+                       tokens.push(Token::new(TokenType::Equal,"=".to_owned()));
+                      }
+                        _ => (), // TODO:Identifiers
                     } 
                 self.counter += 1;
             }
