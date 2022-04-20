@@ -45,7 +45,14 @@ use crate::token::*;
                       },
                       '=' => {
                        tokens.push(Token::new(TokenType::Equal,"=".to_owned()));
-                      }
+                      },
+                      '/' => {
+                      self.counter += 1;
+                      if self.get_current_char() == '/' {
+                           return; 
+                        }
+                      },
+
                         _ => (), // TODO:Identifiers
                     } 
                 self.counter += 1;
@@ -59,7 +66,7 @@ use crate::token::*;
                pub fn peek_next_token(&mut self) -> char {
                     self.counter += 1; 
                     let next_token = self.get_current_char();
-                    return next_token
-                }
-                */
+                    return next_token;
+                }*/
+                
     }
