@@ -20,9 +20,11 @@ use crate::token::*;
                     match self.get_current_char() {
                       'f' => {
                             let mut nextchars:Vec<char> = Vec::<char>::new();
-                                while self.get_current_char().is_alphabetic() {
+                            let mut i:usize = 0;    
+                            while i < 4 {
                                     nextchars.push(self.get_current_char());
                                     self.counter +=1;
+                                    i += 1;
                                 }
                             if nextchars == ['f','u','n','c'] {
                                 tokens.push(Token::new(TokenType::Res_Function,"func".to_owned()));
@@ -49,16 +51,15 @@ use crate::token::*;
                       '/' => {
                       self.counter += 1;
                       if self.get_current_char() == '/' {
-                           return; 
+                          // do nothing
                         }
                       },
-
                         _ => (), // TODO:Identifiers
                     } 
                 self.counter += 1;
-            }
+                        }
             print!("{:?}",tokens);
-        }
+                    }
                 fn get_current_char(&self) -> char {
                      let cc = self.contents[self.counter]; return cc
                 }

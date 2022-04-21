@@ -22,7 +22,8 @@ fn main() {
         }
         "--comp" | "-c" => {
         let filename = &args[2];
-        let file = fs::read_to_string(filename).unwrap(); 
+        let mut file = fs::read_to_string(filename).unwrap(); 
+        file.retain(|c| !c.is_whitespace());
         let mut lexer = lexer::lexer::new(file);
         lexer.lex();
         }

@@ -1,3 +1,4 @@
+// discard this please
 func sayWhatGilbertIs(Something) {
 
 	printnl(Something);
@@ -6,6 +7,7 @@ func sayWhatGilbertIs(Something) {
 func !! main () {
  printnl("Gilbert");
  sayWhatGilbertIs("Is my snake");
+ String nlex = "flex";
 }
  func foo () {
  	String Gilbert = "snek";
