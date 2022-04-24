@@ -45,6 +45,20 @@ use crate::token::*;
                         }
                         tokens.push(Token::new(TokenType::STRING,nextchars.into_iter().collect()));
                       },
+                      'S' => { 
+                        let mut nextchars:Vec<char> = Vec::<char>::new();
+                            let mut i:usize = 0;    
+                            while i < 6 {
+                                    nextchars.push(self.get_current_char());
+                                    i += 1;
+                                    self.counter +=1;
+                                }
+                            let s:String  = nextchars.into_iter().collect();
+                            if s == "String" {
+                                tokens.push(Token::new(TokenType::Res_String,"String".to_owned()));
+                            }
+
+                        },
                       '=' => {
                        tokens.push(Token::new(TokenType::Equal,"=".to_owned()));
                       },
