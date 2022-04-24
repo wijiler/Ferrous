@@ -132,9 +132,42 @@ use crate::token::*;
                        tokens.push(Token::new(TokenType::Equal,"=".to_owned()));
                       },
                       '/' => {
-                      self.peek_next_token();
-                      if self.peek_next_token() == '/' {}
+                      if self.peek_next_token() == '/' {self.counter += 2;continue;}
+                      else {
+                        tokens.push(Token::new(TokenType::Divide,"/".to_owned()));
+                      }
                       },
+                    '>' => {
+                       tokens.push(Token::new(TokenType::Rarrow,">".to_owned()));
+                      },
+                     '<' => {
+                       tokens.push(Token::new(TokenType::Larrow,"<".to_owned()));
+                      },
+                    '(' => {
+                       tokens.push(Token::new(TokenType::LParen,"(".to_owned()));
+                      },
+                    ')' => {
+                       tokens.push(Token::new(TokenType::Rparen,")".to_owned()));
+                      },
+                    '!' => {
+                       if self.peek_next_token() == '!' {
+                       tokens.push(Token::new(TokenType::Main,"Entrypoint".to_owned())); 
+                       }
+                       else {
+                       tokens.push(Token::new(TokenType::Bang,"!".to_owned()));
+                       }
+                      },
+                      '+' => {
+                       tokens.push(Token::new(TokenType::Add,"+".to_owned()));
+                      },
+                      
+                     '-' => {
+                       tokens.push(Token::new(TokenType::Subtract,"-".to_owned()));
+                      },  
+                     '*' => {
+                       tokens.push(Token::new(TokenType::Multiply,"*".to_owned()));
+                      },
+                     
                         _ => (), // TODO:Identifiers
                     } 
                 self.counter += 1;

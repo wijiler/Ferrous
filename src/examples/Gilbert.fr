@@ -7,12 +7,5 @@ func sayWhatGilbertIs(Something:String) {
 func !! main () {
  printnl("Gilbert");
  sayWhatGilbertIs("Is my snake");
- String nlex = "flex";
 }
- func foo () {
- 	String Gilbert = "snek";
-	Float bar = 1.635;
-	Int boo = 1;
-	Char nair = 'n';
-	Bool type = True;
- }
+
