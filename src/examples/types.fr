@@ -1,4 +1,4 @@
- func foo () {
+func foo () {
  	String Gilbert = "snek";
 	Float bar = 1.635;
 	Int boo = 1;

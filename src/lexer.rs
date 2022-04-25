@@ -27,11 +27,10 @@ use crate::token::*;
                                     self.counter +=1;
                                     i += 1;
                                 }
-                            let s:String = nextchars.into_iter().collect();
+                            let s:String = nextchars.iter().collect();
                             if s == "func" {
                                 tokens.push(Token::new(TokenType::Res_Function,"func".to_owned()));
                             }
-                            else{continue;}
                       },  
                       '\"' => {
                         self.counter += 1;
@@ -40,7 +39,7 @@ use crate::token::*;
                             nextchars.push(self.get_current_char());
                             self.counter += 1;
                         }
-                        tokens.push(Token::new(TokenType::STRING,nextchars.into_iter().collect()));
+                        tokens.push(Token::new(TokenType::STRING,nextchars.iter().collect()));
                       },
                       'S' => { 
                         let mut nextchars:Vec<char> = Vec::<char>::new();
@@ -50,12 +49,10 @@ use crate::token::*;
                                     i += 1;
                                     self.counter +=1;
                                 }
-                            let s:String  = nextchars.into_iter().collect();
+                            let s:String  = nextchars.iter().collect();
                             if s == "String" {
                                 tokens.push(Token::new(TokenType::Res_String,"String".to_owned()));
                             }
-                            else {continue;}
-
                         },
                     'I' => { 
                         let mut nextchars:Vec<char> = Vec::<char>::new();
@@ -65,11 +62,10 @@ use crate::token::*;
                                     i += 1;
                                     self.counter +=1;
                                 }
-                            let s:String  = nextchars.into_iter().collect();
+                            let s:String  = nextchars.iter().collect();
                             if s == "Int" {
                                 tokens.push(Token::new(TokenType::Res_Int,"Int".to_owned()));
                             }
-                            else{continue;}
                         },
                         'B' => {
                         let mut nextchars:Vec<char> = Vec::<char>::new();
@@ -79,11 +75,10 @@ use crate::token::*;
                                     i += 1;
                                     self.counter +=1;
                                 }
-                            let s:String  = nextchars.into_iter().collect();
+                            let s:String  = nextchars.iter().collect();
                             if s == "Bool" {
                                 tokens.push(Token::new(TokenType::Res_Bool,"Bool".to_owned()));
                             }
-                            else{continue;}
                         },
                     'C' => {
                     let mut nextchars:Vec<char> = Vec::<char>::new();
@@ -93,12 +88,10 @@ use crate::token::*;
                                     i += 1;
                                     self.counter +=1;
                                 }
-                            let s:String  = nextchars.into_iter().collect();
+                            let s:String  = nextchars.iter().collect();
                             if s == "Char" {
                                 tokens.push(Token::new(TokenType::Res_Char,"Char".to_owned()));
                             }
-                            else{continue;}
-
                     },
                     'U' => {
                     let mut nextchars:Vec<char> = Vec::<char>::new();
@@ -108,11 +101,11 @@ use crate::token::*;
                                     i += 1;
                                     self.counter +=1;
                                 }
-                            let s:String  = nextchars.into_iter().collect();
+                            let s:String  = nextchars.iter().collect();
                             if s == "UInt" {
                                 tokens.push(Token::new(TokenType::Res_Uint,"UInt".to_owned()));
                             }
-                            else{continue;}
+                            
                     },
                     'F' => {
                     let mut nextchars:Vec<char> = Vec::<char>::new();
@@ -122,11 +115,10 @@ use crate::token::*;
                                 i += 1;
                                 self.counter +=1;
                             }
-                        let s:String  = nextchars.into_iter().collect();
+                        let s:String  = nextchars.iter().collect();
                         if s == "Float" {
                             tokens.push(Token::new(TokenType::Res_Float,"Float".to_owned()));
                         }
-                        else{continue;}   
                     },
                       '=' => {
                        tokens.push(Token::new(TokenType::Equal,"=".to_owned()));
@@ -167,8 +159,31 @@ use crate::token::*;
                      '*' => {
                        tokens.push(Token::new(TokenType::Multiply,"*".to_owned()));
                       },
-                     
-                        _ => (), // TODO:Identifiers
+                    '&' => {
+                        if self.peek_next_token() == '&'{
+                         tokens.push(Token::new(TokenType::And,"&&".to_owned()));
+                         self.counter += 2;
+                        }
+                        else {
+                       tokens.push(Token::new(TokenType::And,"&".to_owned()));
+                        }
+                    }, 
+                    '|' => {
+                        if self.peek_next_token() == '|'{
+                         tokens.push(Token::new(TokenType::Or,"||".to_owned()));
+                         self.counter += 2;
+                        }
+                        else {
+                       tokens.push(Token::new(TokenType::Or,"|".to_owned()));
+                        }
+                    }, 
+
+                        _ => {
+                        if self.get_current_char() != ' '{
+                           println!("Unknown Token at index {} consider removing {}",self.counter,self.get_current_char());
+                           return;
+                            }
+                        }, 
                     } 
                 self.counter += 1;
                         }
@@ -177,11 +192,26 @@ use crate::token::*;
                 fn get_current_char(&self) -> char {
                      let cc = self.contents[self.counter]; return cc
                 }
-             
+ 
                pub fn peek_next_token(&self) -> char {
                     let counter = &self.counter + 1;  
                     let cc:char = self.contents[counter.to_owned()]; return cc
+                } 
+               pub fn peek_next_couple_tokens(&self,amount:usize) -> char {
+                    let counter = &self.counter + amount;  
+                    let cc:char = self.contents[counter.to_owned()]; return cc
                 }
+               pub fn peek_back_couple_tokens(&self,amount:usize) -> char {
+                    let counter = &self.counter - amount;  
+                    let mut cc:char = self.contents[counter.to_owned()]; return cc
+                }
+  pub fn peek_couple_tokens_and_record(&self,amountback:usize,amountforward:usize) -> char {
+                    let counter = &self.counter - amountback;
+                    let mut nextchars:Vec<char> = Vec::<char>::new();
+
+                    let cc:char = self.contents[counter.to_owned()]; return cc
+                }
+ 
             pub fn last_token(&self) -> char {
                     let counter = &self.counter - 1;  
                     let cc = self.contents[counter.to_owned()]; return cc

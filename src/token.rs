@@ -2,7 +2,7 @@
 pub enum TokenType {
 // Gates
 Or = 29, 
-Not = 30,
+Not = 30, // too lazy to delete just wont be used replaced by Bang
 XOr = 31,
 And = 32,
 
