@@ -86,7 +86,7 @@ use crate::token::*;
                             while i < 4 {
                                     nextchars.push(self.get_current_char());
                                     i += 1;
-                                    self.counter +=1;
+                                   self.counter +=1;
                                 }
                             let s:String  = nextchars.iter().collect();
                             if s == "Char" {
@@ -180,8 +180,7 @@ use crate::token::*;
 
                         _ => {
                         if self.get_current_char() != ' '{
-                           println!("Unknown Token at index {} consider removing {}",self.counter,self.get_current_char());
-                           return;
+                                if self.record_tokens(8,6) == "String" || self.record_tokens(6,4) == "func" {}
                             }
                         }, 
                     } 
@@ -203,17 +202,22 @@ use crate::token::*;
                 }
                pub fn peek_back_couple_tokens(&self,amount:usize) -> char {
                     let counter = &self.counter - amount;  
-                    let mut cc:char = self.contents[counter.to_owned()]; return cc
-                }
-  pub fn peek_couple_tokens_and_record(&self,amountback:usize,amountforward:usize) -> char {
-                    let counter = &self.counter - amountback;
-                    let mut nextchars:Vec<char> = Vec::<char>::new();
-
                     let cc:char = self.contents[counter.to_owned()]; return cc
+                }
+  pub fn record_tokens(&mut self,amountback:usize,amountforward:usize) -> String {
+                    let mut nextchars:Vec<char> = Vec::<char>::new();
+                    let mut i = 0;
+                    self.counter -= amountback;
+                    while i < amountforward {
+                        nextchars.push(self.get_current_char());
+                            i +=1;
+                            self.counter += 1;
+                    }
+                    return nextchars.into_iter().collect();
                 }
  
             pub fn last_token(&self) -> char {
                     let counter = &self.counter - 1;  
                     let cc = self.contents[counter.to_owned()]; return cc
                 }
-    }
+    } 
