@@ -14,7 +14,6 @@ use crate::token::*;
            }
         }
         pub fn lex(&mut self) {
-            self.peek_next_token();
             let clength = self.contents.len();
             let mut tokens:Vec<Token> = Vec::<Token>::new();
             while self.counter < clength {   
@@ -86,7 +85,7 @@ use crate::token::*;
                             while i < 4 {
                                     nextchars.push(self.get_current_char());
                                     i += 1;
-                                   self.counter +=1;
+                                  self.counter +=1;
                                 }
                             let s:String  = nextchars.iter().collect();
                             if s == "Char" {
@@ -179,19 +178,41 @@ use crate::token::*;
                     }, 
 
                         _ => {
-                        if self.get_current_char() != ' '{
-                                if self.record_tokens(8,6) == "String" || self.record_tokens(6,4) == "func" {}
+                        if !self.get_current_char().is_whitespace(){
+                                if self.record_tokens(8,6) == "String" || self.record_tokens(6,4) == "func" || self.record_tokens(7,5) == "Float" || self.record_tokens(6,4) == "Bool" || self.record_tokens(6,4) == "Char" || self.record_tokens(5,3) == "Int" || self.record_tokens(6,4) == "UInt" {
+                                    println!("working in 2nd if");
+                                    self.skip_white_space();
+                                    let mut nextchars:Vec<char> = Vec::<char>::new();
+                                    while self.get_current_char().is_alphabetic() {
+                                        nextchars.push(self.get_current_char());
+                                        self.counter +=1;
+                                    }
+                                }
+                                 else {
+                                    println!("Found unknown token at character {},consider removing {}?",self.counter,self.get_current_char());
+                                    return;
+                                    }
+                                 self.counter += 1;
                             }
+                        else {continue;}
                         }, 
                     } 
                 self.counter += 1;
+                if self.counter == clength {break;}
                         }
             print!("{:?}",tokens);
                     }
                 fn get_current_char(&self) -> char {
                      let cc = self.contents[self.counter]; return cc
                 }
- 
+               fn skip_white_space(&mut self) {
+                while self.get_current_char().is_whitespace() {
+                    self.counter +=1;
+                    if !self.get_current_char().is_whitespace() {
+                        break;
+                    }
+                }
+               }
                pub fn peek_next_token(&self) -> char {
                     let counter = &self.counter + 1;  
                     let cc:char = self.contents[counter.to_owned()]; return cc
@@ -220,4 +241,4 @@ use crate::token::*;
                     let counter = &self.counter - 1;  
                     let cc = self.contents[counter.to_owned()]; return cc
                 }
-    } 
+    }  
