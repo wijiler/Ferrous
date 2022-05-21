@@ -1,7 +1,7 @@
 func foo () {
- 	String Gilbert = "snek";
-	Float bar = 1.635;
-	Int boo = 1;
-	Char nair = 'n';
-	Bool type = True;
+String Gilbert = "snek";
+Float bar = 1.635;
+Int boo = 1;
+Char nair = 'n';
+Bool type = True;
  }

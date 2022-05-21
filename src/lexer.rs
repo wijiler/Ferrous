@@ -1,5 +1,5 @@
 use crate::token::*;
-
+use std::{fs::File, io::Write};
 
     
    pub struct lexer {
@@ -177,30 +177,15 @@ use crate::token::*;
                         }
                     }, 
 
-                        _ => {
-                        if !self.get_current_char().is_whitespace(){
-                                if self.record_tokens(8,6) == "String" || self.record_tokens(6,4) == "func" || self.record_tokens(7,5) == "Float" || self.record_tokens(6,4) == "Bool" || self.record_tokens(6,4) == "Char" || self.record_tokens(5,3) == "Int" || self.record_tokens(6,4) == "UInt" {
-                                    println!("working in 2nd if");
-                                    self.skip_white_space();
-                                    let mut nextchars:Vec<char> = Vec::<char>::new();
-                                    while self.get_current_char().is_alphabetic() {
-                                        nextchars.push(self.get_current_char());
-                                        self.counter +=1;
-                                    }
-                                }
-                                 else {
-                                    println!("Found unknown token at character {},consider removing {}?",self.counter,self.get_current_char());
-                                    return;
-                                    }
-                                 self.counter += 1;
-                            }
-                        else {continue;}
-                        }, 
+                        _ => (), // we will let the parser do this
                     } 
                 self.counter += 1;
                 if self.counter == clength {break;}
                         }
             print!("{:?}",tokens);
+            let mut file = File::create("lexed.frl")
+                .expect("Couldnt create final lexed file");
+            write!(file,"{:?}",tokens).expect("Couldnt write final lex");
                     }
                 fn get_current_char(&self) -> char {
                      let cc = self.contents[self.counter]; return cc
@@ -224,17 +209,6 @@ use crate::token::*;
                pub fn peek_back_couple_tokens(&self,amount:usize) -> char {
                     let counter = &self.counter - amount;  
                     let cc:char = self.contents[counter.to_owned()]; return cc
-                }
-  pub fn record_tokens(&mut self,amountback:usize,amountforward:usize) -> String {
-                    let mut nextchars:Vec<char> = Vec::<char>::new();
-                    let mut i = 0;
-                    self.counter -= amountback;
-                    while i < amountforward {
-                        nextchars.push(self.get_current_char());
-                            i +=1;
-                            self.counter += 1;
-                    }
-                    return nextchars.into_iter().collect();
                 }
  
             pub fn last_token(&self) -> char {
