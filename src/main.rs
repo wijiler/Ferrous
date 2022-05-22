@@ -3,6 +3,7 @@ use std::{env, process,fs};
 
 // imports
 pub mod token;
+pub mod parser;
 pub mod lexer;
 // args handler so you can use the thing
 fn main() {
