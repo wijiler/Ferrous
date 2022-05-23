@@ -1,3 +1,4 @@
+use crate::token::TokenType;
 /// Types of errors we can get
 enum Errort {
     Unknowntoken,
@@ -20,4 +21,10 @@ fn error(e:Errort,line:usize) {
             return;
         }
     }
+}
+
+enum AsmInstructions {
+    movl,
+    movq,
+    Ascii,
 }

@@ -1,11 +1,6 @@
 // discard this please
 func sayWhatGilbertIs(Something:String) {
-
 	printnl(Something);
 }
-
 func !! main () {
- printnl("Gilbert");
- sayWhatGilbertIs("Is my snake");
 }
-

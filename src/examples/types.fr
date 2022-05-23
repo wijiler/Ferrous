@@ -1,3 +1,4 @@
+// yeehaw
 func foo () {
 String Gilbert = "snek";
 Float bar = 1.635;

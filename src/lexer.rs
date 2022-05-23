@@ -30,6 +30,7 @@ use std::{fs::File, io::Write};
                             if s == "func" {
                                 tokens.push(Token::new(TokenType::Res_Function,"func".to_owned()));
                             }
+                            else{continue;}
                       },  
                       '\"' => {
                         self.counter += 1;
@@ -52,6 +53,7 @@ use std::{fs::File, io::Write};
                             if s == "String" {
                                 tokens.push(Token::new(TokenType::Res_String,"String".to_owned()));
                             }
+                            else{continue;}
                         },
                     'I' => { 
                         let mut nextchars:Vec<char> = Vec::<char>::new();
@@ -65,6 +67,7 @@ use std::{fs::File, io::Write};
                             if s == "Int" {
                                 tokens.push(Token::new(TokenType::Res_Int,"Int".to_owned()));
                             }
+                            else{continue;}
                         },
                         'B' => {
                         let mut nextchars:Vec<char> = Vec::<char>::new();
@@ -78,6 +81,7 @@ use std::{fs::File, io::Write};
                             if s == "Bool" {
                                 tokens.push(Token::new(TokenType::Res_Bool,"Bool".to_owned()));
                             }
+                            else{continue;}
                         },
                     'C' => {
                     let mut nextchars:Vec<char> = Vec::<char>::new();
@@ -91,6 +95,7 @@ use std::{fs::File, io::Write};
                             if s == "Char" {
                                 tokens.push(Token::new(TokenType::Res_Char,"Char".to_owned()));
                             }
+                            else{continue;}
                     },
                     'U' => {
                     let mut nextchars:Vec<char> = Vec::<char>::new();
@@ -104,6 +109,7 @@ use std::{fs::File, io::Write};
                             if s == "UInt" {
                                 tokens.push(Token::new(TokenType::Res_Uint,"UInt".to_owned()));
                             }
+                            else{continue;}
                             
                     },
                     'F' => {
@@ -118,12 +124,18 @@ use std::{fs::File, io::Write};
                         if s == "Float" {
                             tokens.push(Token::new(TokenType::Res_Float,"Float".to_owned()));
                         }
+                        else{continue;}
                     },
                       '=' => {
                        tokens.push(Token::new(TokenType::Equal,"=".to_owned()));
                       },
                       '/' => {
-                      if self.peek_next_token() == '/' {self.counter += 2;continue;}
+                      if self.peek_next_token() == '/' {
+                          while self.get_current_char() != '\n' {
+                                self.counter +=1;
+                      }
+                        continue;
+                    }
                       else {
                         tokens.push(Token::new(TokenType::Divide,"/".to_owned()));
                       }
@@ -175,12 +187,11 @@ use std::{fs::File, io::Write};
                         else {
                        tokens.push(Token::new(TokenType::Or,"|".to_owned()));
                         }
-                    }, 
+                    },
 
                         _ => (), // we will let the parser do this
                     } 
                 self.counter += 1;
-                if self.counter == clength {break;}
                         }
             print!("{:?}",tokens);
             let mut file = File::create("lexed.frl")
