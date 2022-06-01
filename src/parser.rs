@@ -1,33 +1,6 @@
 use crate::token::TokenType;
-/// Types of errors we can get
-enum Errort {
-    Unknowntoken,
-    NoIdentifier,
-    NoSemiColon,
-}
-/// Call an error
-fn error(e:Errort,line:usize) {
-    match e {
-        Errort::NoSemiColon => {
-            println!("NoSemiColon at line {}",line);
-            return;
-         },
-        Errort::NoIdentifier => {
-            println!("NoIdentifier at line {}",line);
-            return;
-        },
-       Errort::Unknowntoken => {
-            println!("Unknowntoken at line {}",line);
-            return;
-        }
-    }
-}
-enum Value {
-    string(String),
-    int(i64),
-    uint(u64),
-    float(f64),
-}
+
+
 enum Registers64{
     // temp/return
     rax{value:Value},
@@ -45,12 +18,26 @@ enum Registers64{
     r9{value:Value}, // 6
     r10{value:Value}, // temp
     r11{value:Value},// temp
+    // r12-15 are all callee registers
+    r12{value:Value},
+    r13{value:Value},
+    r14{value:Value},
+    r15{value:Value},
 }
-
 //enum Registers32{}
-
+enum Value {
+    string(String),
+    int(i64),
+    uint(u64),
+    float(f64),
+    register(Registers64),
+}
 enum AsmInstructions {
   //movl{value:i32,register:Registers32},// this is a 64 bit lang I dont want to work on 32 bit rn
     movq{value:Value,register:Registers64},// 64 bit mov
     ascii{value:String},
+    call{label:String},
+    addq{a:Value,b:Value},
+    subq{a:Value,b:Value},
+    imulq{a:Value,b:Value},
 }

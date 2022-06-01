@@ -5,6 +5,7 @@ use std::{env, process,fs};
 pub mod token;
 pub mod parser;
 pub mod lexer;
+pub mod Error;
 // args handler so you can use the thing
 fn main() {
     let args: Vec<String> = env::args().collect();
