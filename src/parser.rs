@@ -24,7 +24,8 @@ fn error(e:Errort,line:usize) {
 }
 enum Value {
     string(String),
-    int(u64),
+    int(i64),
+    uint(u64),
     float(f64),
 }
 enum Registers64{
