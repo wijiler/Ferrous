@@ -30,7 +30,7 @@ enum Value {
     int(i64),
     uint(u64),
     float(f64),
-    register(Registers64),
+    register(Box<Registers64>),
 }
 enum AsmInstructions {
   //movl{value:i32,register:Registers32},// this is a 64 bit lang I dont want to work on 32 bit rn
@@ -40,4 +40,5 @@ enum AsmInstructions {
     addq{a:Value,b:Value},
     subq{a:Value,b:Value},
     imulq{a:Value,b:Value},
+    idivq{a:Value,b:Value},
 }
