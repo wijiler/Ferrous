@@ -1,4 +1,4 @@
-use std::fs::File;
+use std::fs;
 
 enum Registers64{
     // temp/return
@@ -64,4 +64,21 @@ impl AstNode {
         }
     }
 }
+struct parser { // gonna take some work from the lexer
+        contents:Vec<char>,
+        counter:usize,
+}
+impl parser {
+pub fn new(c:String) -> Self {
+            Self {
+            contents:c.chars().collect(),
+            counter:0,
+    }
+}
+fn create_ast() {
 
+}
+fn get_current_char(&self) -> char {
+     let cc = self.contents[self.counter]; return cc
+ }
+}

@@ -84,7 +84,7 @@ use std::{fs::File, io::Write};
                                 if nextchars2 != [' '] || nextchars2 != ['\0'] {
                                 tokens.push(Token::new(TokenType::Identifier,nextchars2.iter().collect()));
                                 }
-                               else { println!("somewhere your forgor to put identifier for a function"); return; } 
+                               else { println!("somewhere your forgor to put identifier for a String"); return; } 
 
                             }
                             else{continue;}
@@ -109,7 +109,7 @@ use std::{fs::File, io::Write};
                                 if nextchars2 != [' '] || nextchars2 != ['\0'] {
                                 tokens.push(Token::new(TokenType::Identifier,nextchars2.iter().collect()));
                                 }
-                               else { println!("somewhere your forgor to put identifier for a function"); return; } 
+                               else { println!("somewhere your forgor to put identifier for an Interger"); return; } 
 
                             }
                             else{continue;}
@@ -134,7 +134,7 @@ use std::{fs::File, io::Write};
                                 if nextchars2 != [' '] || nextchars2 != ['\0'] {
                                 tokens.push(Token::new(TokenType::Identifier,nextchars2.iter().collect()));
                                 }
-                               else { println!("somewhere your forgor to put identifier for a function"); return; } 
+                               else { println!("somewhere your forgor to put identifier for a Boolean"); return; } 
 
                             }
                             else{continue;}
@@ -159,7 +159,7 @@ use std::{fs::File, io::Write};
                                 if nextchars2 != [' '] || nextchars2 != ['\0'] {
                                 tokens.push(Token::new(TokenType::Identifier,nextchars2.iter().collect()));
                                 }
-                               else { println!("somewhere your forgor to put identifier for a function"); return; } 
+                               else { println!("somewhere your forgor to put identifier for a char"); return; } 
 
                             }
                             else{continue;}
@@ -184,7 +184,7 @@ use std::{fs::File, io::Write};
                                 if nextchars2 != [' '] || nextchars2 != ['\0'] {
                                 tokens.push(Token::new(TokenType::Identifier,nextchars2.iter().collect()));
                                 }
-                               else { println!("somewhere your forgor to put identifier for a function"); return; } 
+                               else { println!("somewhere your forgor to put identifier for a uint"); return; } 
 
                             }
                             else{continue;}
@@ -210,7 +210,7 @@ use std::{fs::File, io::Write};
                                 if nextchars2 != [' '] || nextchars2 != ['\0'] {
                                 tokens.push(Token::new(TokenType::Identifier,nextchars2.iter().collect()));
                                 }
-                               else { println!("somewhere your forgor to put identifier for a function"); return; } 
+                               else { println!("somewhere your forgor to put identifier for a float"); return; } 
 
                         }
                         else{continue;}

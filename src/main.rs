@@ -10,7 +10,7 @@ pub mod Error;
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() == 1 {
-        println!("ARGS not applied");
+        println!("ARGS not supplied");
         process::exit(1);
     }
     match args[1].as_str() {
@@ -54,7 +54,7 @@ fn print_help() {
             r"ferric {}
             
 USAGE:
-ferric [FILE] [ARGS]
+ferric [ARGS] [FILE]
 FLAGS:
 -h show this help screen!
 -v show version
