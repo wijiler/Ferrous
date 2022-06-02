@@ -1,6 +1,5 @@
 use crate::token::TokenType;
 
-
 enum Registers64{
     // temp/return
     rax{value:Value},
@@ -24,12 +23,22 @@ enum Registers64{
     r14{value:Value},
     r15{value:Value},
 }
+enum fRegister {
+    xmm0{value:f64},
+    xmm1{value:f64},
+    xmm2{value:f64},
+    xmm3{value:f64},
+    xmm4{value:f64},
+    xmm5{value:f64},
+    xmm6{value:f64},
+    xmm7{value:f64},
+}
 //enum Registers32{}
 enum Value {
     string(String),
     int(i64),
     uint(u64),
-    float(f64),
+    freg(fRegister),
     register(Box<Registers64>),
 }
 enum AsmInstructions {
@@ -41,4 +50,21 @@ enum AsmInstructions {
     subq{a:Value,b:Value},
     imulq{a:Value,b:Value},
     idivq{a:Value,b:Value},
+}
+struct AstNode {
+    value:AsmInstructions,
+    children:[Option<Box<AstNode>>;2]
+}
+
+struct Ast {
+    entry:TokenType,
+    nodes:Vec<AstNode>,
+}
+impl Ast {
+    fn new() -> Self {
+        Self{
+            entry:TokenType::Main,
+            nodes:Vec::new(),
+        }
+    }
 }
