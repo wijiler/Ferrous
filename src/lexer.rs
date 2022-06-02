@@ -154,7 +154,8 @@ use std::{fs::File, io::Write};
                       },
                     '!' => {
                        if self.peek_next_token() == '!' {
-                       tokens.push(Token::new(TokenType::Main,"Entrypoint".to_owned())); 
+                       tokens.push(Token::new(TokenType::Main,"Entrypoint".to_owned()));
+                       self.counter += 1;
                        }
                        else {
                        tokens.push(Token::new(TokenType::Bang,"!".to_owned()));
@@ -226,4 +227,4 @@ use std::{fs::File, io::Write};
                     let counter = &self.counter - 1;  
                     let cc = self.contents[counter.to_owned()]; return cc
                 }
-    }  
+ 
