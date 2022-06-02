@@ -51,8 +51,22 @@ use std::{fs::File, io::Write};
                         }
                         tokens.push(Token::new(TokenType::STRING,nextchars.iter().collect()));
                       },
+                      '\'' => {
+                        self.counter += 1;
+                        let mut nextchars:Vec<char> = Vec::<char>::new();
+                        while self.get_current_char() != '\'' {
+                            nextchars.push(self.get_current_char());
+                            self.counter += 1;
+                        }
+                        if nextchars.len() > 1 { println!("char can only hold 1 character"); return; }
+                        else {
+                        tokens.push(Token::new(TokenType::CHAR,nextchars.iter().collect()));
+                        }
+                      },
+
                       'S' => { 
                         let mut nextchars:Vec<char> = Vec::<char>::new();
+                        let mut nextchars2:Vec<char> = Vec::<char>::new();
                             let mut i:usize = 0;    
                             while i < 6 {
                                     nextchars.push(self.get_current_char());
@@ -62,11 +76,22 @@ use std::{fs::File, io::Write};
                             let s:String  = nextchars.iter().collect();
                             if s == "String" {
                                 tokens.push(Token::new(TokenType::Res_String,"String".to_owned()));
+                                self.skip_white_space();
+                                while self.get_current_char().is_alphabetic() {
+                                    nextchars2.push(self.get_current_char());
+                                    self.counter +=1
+                                }
+                                if nextchars2 != [' '] || nextchars2 != ['\0'] {
+                                tokens.push(Token::new(TokenType::Identifier,nextchars2.iter().collect()));
+                                }
+                               else { println!("somewhere your forgor to put identifier for a function"); return; } 
+
                             }
                             else{continue;}
                         },
                     'I' => { 
                         let mut nextchars:Vec<char> = Vec::<char>::new();
+                        let mut nextchars2:Vec<char> = Vec::<char>::new();
                             let mut i:usize = 0;    
                             while i < 3 {
                                     nextchars.push(self.get_current_char());
@@ -76,11 +101,22 @@ use std::{fs::File, io::Write};
                             let s:String  = nextchars.iter().collect();
                             if s == "Int" {
                                 tokens.push(Token::new(TokenType::Res_Int,"Int".to_owned()));
+                                self.skip_white_space();
+                                while self.get_current_char().is_alphabetic() {
+                                    nextchars2.push(self.get_current_char());
+                                    self.counter +=1
+                                }
+                                if nextchars2 != [' '] || nextchars2 != ['\0'] {
+                                tokens.push(Token::new(TokenType::Identifier,nextchars2.iter().collect()));
+                                }
+                               else { println!("somewhere your forgor to put identifier for a function"); return; } 
+
                             }
                             else{continue;}
                         },
                         'B' => {
                         let mut nextchars:Vec<char> = Vec::<char>::new();
+                        let mut nextchars2:Vec<char> = Vec::<char>::new();
                             let mut i:usize = 0;    
                             while i < 4 {
                                     nextchars.push(self.get_current_char());
@@ -90,11 +126,22 @@ use std::{fs::File, io::Write};
                             let s:String  = nextchars.iter().collect();
                             if s == "Bool" {
                                 tokens.push(Token::new(TokenType::Res_Bool,"Bool".to_owned()));
+                                self.skip_white_space();
+                                while self.get_current_char().is_alphabetic() {
+                                    nextchars2.push(self.get_current_char());
+                                    self.counter +=1
+                                }
+                                if nextchars2 != [' '] || nextchars2 != ['\0'] {
+                                tokens.push(Token::new(TokenType::Identifier,nextchars2.iter().collect()));
+                                }
+                               else { println!("somewhere your forgor to put identifier for a function"); return; } 
+
                             }
                             else{continue;}
                         },
                     'C' => {
                     let mut nextchars:Vec<char> = Vec::<char>::new();
+                        let mut nextchars2:Vec<char> = Vec::<char>::new();
                             let mut i:usize = 0;    
                             while i < 4 {
                                     nextchars.push(self.get_current_char());
@@ -104,11 +151,22 @@ use std::{fs::File, io::Write};
                             let s:String  = nextchars.iter().collect();
                             if s == "Char" {
                                 tokens.push(Token::new(TokenType::Res_Char,"Char".to_owned()));
+                                self.skip_white_space();
+                                while self.get_current_char().is_alphabetic() {
+                                    nextchars2.push(self.get_current_char());
+                                    self.counter +=1
+                                }
+                                if nextchars2 != [' '] || nextchars2 != ['\0'] {
+                                tokens.push(Token::new(TokenType::Identifier,nextchars2.iter().collect()));
+                                }
+                               else { println!("somewhere your forgor to put identifier for a function"); return; } 
+
                             }
                             else{continue;}
                     },
                     'U' => {
                     let mut nextchars:Vec<char> = Vec::<char>::new();
+                    let mut nextchars2:Vec<char> = Vec::<char>::new();
                             let mut i:usize = 0;    
                             while i < 4 {
                                     nextchars.push(self.get_current_char());
@@ -118,12 +176,23 @@ use std::{fs::File, io::Write};
                             let s:String  = nextchars.iter().collect();
                             if s == "UInt" {
                                 tokens.push(Token::new(TokenType::Res_Uint,"UInt".to_owned()));
+                                self.skip_white_space();
+                                while self.get_current_char().is_alphabetic() {
+                                    nextchars2.push(self.get_current_char());
+                                    self.counter +=1
+                                }
+                                if nextchars2 != [' '] || nextchars2 != ['\0'] {
+                                tokens.push(Token::new(TokenType::Identifier,nextchars2.iter().collect()));
+                                }
+                               else { println!("somewhere your forgor to put identifier for a function"); return; } 
+
                             }
                             else{continue;}
                             
                     },
                     'F' => {
                     let mut nextchars:Vec<char> = Vec::<char>::new();
+                    let mut nextchars2:Vec<char> = Vec::<char>::new();
                         let mut i:usize = 0;    
                         while i < 5 {
                                 nextchars.push(self.get_current_char());
@@ -133,6 +202,16 @@ use std::{fs::File, io::Write};
                         let s:String  = nextchars.iter().collect();
                         if s == "Float" {
                             tokens.push(Token::new(TokenType::Res_Float,"Float".to_owned()));
+                            self.skip_white_space();
+                                while self.get_current_char().is_alphabetic() {
+                                    nextchars2.push(self.get_current_char());
+                                    self.counter +=1
+                                }
+                                if nextchars2 != [' '] || nextchars2 != ['\0'] {
+                                tokens.push(Token::new(TokenType::Identifier,nextchars2.iter().collect()));
+                                }
+                               else { println!("somewhere your forgor to put identifier for a function"); return; } 
+
                         }
                         else{continue;}
                     },

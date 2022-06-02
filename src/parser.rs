@@ -1,4 +1,4 @@
-use crate::token::TokenType;
+use std::fs::File;
 
 enum Registers64{
     // temp/return
@@ -38,7 +38,7 @@ enum Value {
     string(String),
     int(i64),
     uint(u64),
-    freg(fRegister),
+    fregister(fRegister),
     register(Box<Registers64>),
 }
 enum AsmInstructions {
@@ -50,6 +50,7 @@ enum AsmInstructions {
     subq{a:Value,b:Value},
     imulq{a:Value,b:Value},
     idivq{a:Value,b:Value},
+    xor{a:Value,b:Value},
 }
 struct AstNode {
     value:AsmInstructions,
@@ -63,3 +64,4 @@ impl AstNode {
         }
     }
 }
+

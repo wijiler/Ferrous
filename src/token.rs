@@ -9,6 +9,7 @@ And = 32,
 
 Identifier = 0,
 STRING = 1,
+CHAR = 37,
 Int = 2,
 
 
