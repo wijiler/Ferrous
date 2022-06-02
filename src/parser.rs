@@ -53,18 +53,13 @@ enum AsmInstructions {
 }
 struct AstNode {
     value:AsmInstructions,
-    children:[Option<Box<AstNode>>;2]
+    children:Vec<AstNode>,
 }
-
-struct Ast {
-    entry:TokenType,
-    nodes:Vec<AstNode>,
-}
-impl Ast {
-    fn new() -> Self {
-        Self{
-            entry:TokenType::Main,
-            nodes:Vec::new(),
+impl AstNode {
+    fn new(v:AsmInstructions) -> Self {
+        Self {
+            value:v,
+            children:Vec::<AstNode>::new(),
         }
     }
 }

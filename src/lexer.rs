@@ -20,6 +20,7 @@ use std::{fs::File, io::Write};
                     match self.get_current_char() {
                       'f'  => {
                             let mut nextchars:Vec<char> = Vec::<char>::new();
+                            let mut nextchars2:Vec<char> = Vec::<char>::new();
                             let mut i:usize = 0;    
                             while i < 4 {
                                     nextchars.push(self.get_current_char());
@@ -29,6 +30,15 @@ use std::{fs::File, io::Write};
                             let s:String = nextchars.iter().collect();
                             if s == "func" {
                                 tokens.push(Token::new(TokenType::Res_Function,"func".to_owned()));
+                                self.skip_white_space();
+                                while self.get_current_char().is_alphabetic() {
+                                    nextchars2.push(self.get_current_char());
+                                    self.counter +=1
+                                }
+                                if nextchars2 != [' '] || nextchars2 != ['\0'] {
+                                tokens.push(Token::new(TokenType::Identifier,nextchars2.iter().collect()));
+                                }
+                               else { println!("somewhere your forgor to put identifier for a function"); return; } 
                             }
                             else{continue;}
                       },  
@@ -148,6 +158,9 @@ use std::{fs::File, io::Write};
                       },
                     '(' => {
                        tokens.push(Token::new(TokenType::LParen,"(".to_owned()));
+                       let mut nextchars:Vec<char> = Vec::<char>::new();
+                      // while self.get_current_char().is_alphabetic() {nextchars.push(self.get_current_char()); self.counter += 1;} // this is important for the parser
+                       
                       },
                     ')' => {
                        tokens.push(Token::new(TokenType::Rparen,")".to_owned()));
@@ -227,4 +240,4 @@ use std::{fs::File, io::Write};
                     let counter = &self.counter - 1;  
                     let cc = self.contents[counter.to_owned()]; return cc
                 }
- 
+    } 
