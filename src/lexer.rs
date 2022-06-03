@@ -281,6 +281,26 @@ use std::{fs::File, io::Write};
                        tokens.push(Token::new(TokenType::Or,"|".to_owned()));
                         }
                     },
+                    '0'..='9' => {
+                        let mut nextnum:Vec<char> = Vec::<char>::new();
+                        nextnum.push(self.get_current_char());
+                        self.counter +=1;
+                        println!("{:?}",nextnum);
+                        match self.peek_next_token() {
+                            '0'..='9' => { 
+                            nextnum.push(self.get_current_char());
+                            self.counter += 1;
+                            }
+                            '.' => {
+                                self.counter += 1;
+                            }
+                            _ => {
+                                let s:String = nextnum.iter().collect();
+                                tokens.push(Token::new(TokenType::Int,s)); 
+                                println!("{:?}",nextnum);
+                            }
+                        }
+                    },
 
                         _ => (), // we will let the parser do this
                     } 
