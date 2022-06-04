@@ -11,6 +11,7 @@ Identifier = 0,
 STRING = 1,
 CHAR = 37,
 Int = 2,
+Float = 38,
 
 
 // keywords

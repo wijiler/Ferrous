@@ -19,7 +19,6 @@ use std::{fs::File, io::Write};
             let mut tokens:Vec<Token> = Vec::new();
             while self.counter < clength {   
                     match self.get_current_char() {
-                    '.' => { nextnum.push('.'); },
                       'f'  => {
                             let mut nextchars:Vec<char> = Vec::new();
                             let mut nextchars2:Vec<char> = Vec::new();
@@ -285,10 +284,20 @@ use std::{fs::File, io::Write};
                     },
                     '0'..='9' => {
                        nextnum.push(self.get_current_char());
-                       self.counter +=1;
+                       //self.counter +=1;
+                       while self.peek_next_token() != ';' { self.counter += 1;nextnum.push(self.get_current_char());  }
                        let s:String = nextnum.iter().collect();
+                       if !s.contains('.') {
                        tokens.push(Token::new(TokenType::Int,s)); 
+                       nextnum.clear();
+                       }
+                       else if s.matches('.').count() > 1 {
+                           println!("type float cannot have more than one decimal point");
+                           return;
+                       }
+                       else { tokens.push(Token::new(TokenType::Float,s)); nextnum.clear(); }
                     },
+                    '.' => { nextnum.push(self.get_current_char()); },
                         _ => (), // we will let the parser do this
                     } 
                 self.counter += 1;
