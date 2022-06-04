@@ -14,13 +14,15 @@ use std::{fs::File, io::Write};
            }
         }
         pub fn lex(&mut self) {
+            let mut nextnum:Vec<char> = Vec::new();
             let clength = self.contents.len();
-            let mut tokens:Vec<Token> = Vec::<Token>::new();
+            let mut tokens:Vec<Token> = Vec::new();
             while self.counter < clength {   
                     match self.get_current_char() {
+                    '.' => { nextnum.push('.'); },
                       'f'  => {
-                            let mut nextchars:Vec<char> = Vec::<char>::new();
-                            let mut nextchars2:Vec<char> = Vec::<char>::new();
+                            let mut nextchars:Vec<char> = Vec::new();
+                            let mut nextchars2:Vec<char> = Vec::new();
                             let mut i:usize = 0;    
                             while i < 4 {
                                     nextchars.push(self.get_current_char());
@@ -44,7 +46,7 @@ use std::{fs::File, io::Write};
                       },  
                       '\"' => {
                         self.counter += 1;
-                        let mut nextchars:Vec<char> = Vec::<char>::new();
+                        let mut nextchars:Vec<char> = Vec::new();
                         while self.get_current_char() != '\"' {
                             nextchars.push(self.get_current_char());
                             self.counter += 1;
@@ -53,7 +55,7 @@ use std::{fs::File, io::Write};
                       },
                       '\'' => {
                         self.counter += 1;
-                        let mut nextchars:Vec<char> = Vec::<char>::new();
+                        let mut nextchars:Vec<char> = Vec::new();
                         while self.get_current_char() != '\'' {
                             nextchars.push(self.get_current_char());
                             self.counter += 1;
@@ -65,8 +67,8 @@ use std::{fs::File, io::Write};
                       },
 
                       'S' => { 
-                        let mut nextchars:Vec<char> = Vec::<char>::new();
-                        let mut nextchars2:Vec<char> = Vec::<char>::new();
+                        let mut nextchars:Vec<char> = Vec::new();
+                        let mut nextchars2:Vec<char> = Vec::new();
                             let mut i:usize = 0;    
                             while i < 6 {
                                     nextchars.push(self.get_current_char());
@@ -90,8 +92,8 @@ use std::{fs::File, io::Write};
                             else{continue;}
                         },
                     'I' => { 
-                        let mut nextchars:Vec<char> = Vec::<char>::new();
-                        let mut nextchars2:Vec<char> = Vec::<char>::new();
+                        let mut nextchars:Vec<char> = Vec::new();
+                        let mut nextchars2:Vec<char> = Vec::new();
                             let mut i:usize = 0;    
                             while i < 3 {
                                     nextchars.push(self.get_current_char());
@@ -115,8 +117,8 @@ use std::{fs::File, io::Write};
                             else{continue;}
                         },
                         'B' => {
-                        let mut nextchars:Vec<char> = Vec::<char>::new();
-                        let mut nextchars2:Vec<char> = Vec::<char>::new();
+                        let mut nextchars:Vec<char> = Vec::new();
+                        let mut nextchars2:Vec<char> = Vec::new();
                             let mut i:usize = 0;    
                             while i < 4 {
                                     nextchars.push(self.get_current_char());
@@ -140,8 +142,8 @@ use std::{fs::File, io::Write};
                             else{continue;}
                         },
                     'C' => {
-                    let mut nextchars:Vec<char> = Vec::<char>::new();
-                        let mut nextchars2:Vec<char> = Vec::<char>::new();
+                    let mut nextchars:Vec<char> = Vec::new();
+                        let mut nextchars2:Vec<char> = Vec::new();
                             let mut i:usize = 0;    
                             while i < 4 {
                                     nextchars.push(self.get_current_char());
@@ -165,8 +167,8 @@ use std::{fs::File, io::Write};
                             else{continue;}
                     },
                     'U' => {
-                    let mut nextchars:Vec<char> = Vec::<char>::new();
-                    let mut nextchars2:Vec<char> = Vec::<char>::new();
+                    let mut nextchars:Vec<char> = Vec::new();
+                    let mut nextchars2:Vec<char> = Vec::new();
                             let mut i:usize = 0;    
                             while i < 4 {
                                     nextchars.push(self.get_current_char());
@@ -191,8 +193,8 @@ use std::{fs::File, io::Write};
                             
                     },
                     'F' => {
-                    let mut nextchars:Vec<char> = Vec::<char>::new();
-                    let mut nextchars2:Vec<char> = Vec::<char>::new();
+                    let mut nextchars:Vec<char> = Vec::new();
+                    let mut nextchars2:Vec<char> = Vec::new();
                         let mut i:usize = 0;    
                         while i < 5 {
                                 nextchars.push(self.get_current_char());
@@ -237,7 +239,7 @@ use std::{fs::File, io::Write};
                       },
                     '(' => {
                        tokens.push(Token::new(TokenType::LParen,"(".to_owned()));
-                       let mut nextchars:Vec<char> = Vec::<char>::new();
+                       let mut nextchars:Vec<char> = Vec::new();
                       // while self.get_current_char().is_alphabetic() {nextchars.push(self.get_current_char()); self.counter += 1;} // this is important for the parser
                        
                       },
@@ -282,26 +284,11 @@ use std::{fs::File, io::Write};
                         }
                     },
                     '0'..='9' => {
-                        let mut nextnum:Vec<char> = Vec::<char>::new();
-                        nextnum.push(self.get_current_char());
-                        self.counter +=1;
-                        println!("{:?}",nextnum);
-                        match self.peek_next_token() {
-                            '0'..='9' => { 
-                            nextnum.push(self.get_current_char());
-                            self.counter += 1;
-                            }
-                            '.' => {
-                                self.counter += 1;
-                            }
-                            _ => {
-                                let s:String = nextnum.iter().collect();
-                                tokens.push(Token::new(TokenType::Int,s)); 
-                                println!("{:?}",nextnum);
-                            }
-                        }
+                       nextnum.push(self.get_current_char());
+                       self.counter +=1;
+                       let s:String = nextnum.iter().collect();
+                       tokens.push(Token::new(TokenType::Int,s)); 
                     },
-
                         _ => (), // we will let the parser do this
                     } 
                 self.counter += 1;
@@ -326,17 +313,4 @@ use std::{fs::File, io::Write};
                     let counter = &self.counter + 1;  
                     let cc:char = self.contents[counter.to_owned()]; return cc
                 } 
-               pub fn peek_next_couple_tokens(&self,amount:usize) -> char {
-                    let counter = &self.counter + amount;  
-                    let cc:char = self.contents[counter.to_owned()]; return cc
-                }
-               pub fn peek_back_couple_tokens(&self,amount:usize) -> char {
-                    let counter = &self.counter - amount;  
-                    let cc:char = self.contents[counter.to_owned()]; return cc
-                }
- 
-            pub fn last_token(&self) -> char {
-                    let counter = &self.counter - 1;  
-                    let cc = self.contents[counter.to_owned()]; return cc
-                }
     } 
