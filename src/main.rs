@@ -28,6 +28,7 @@ fn main() {
 //        file.retain(|c| !c.is_whitespace());
         let mut lexer = lexer::lexer::new(file);
         lexer.lex();
+        parser::create_ast();
         }
         _ => {}
     }

@@ -34,7 +34,6 @@ enum fRegister {
     xmm6{value:f64},
     xmm7{value:f64},
 }
-//enum Registers32{}
 enum Value {
     string(String),
     int(i64),
@@ -54,16 +53,23 @@ enum AsmInstructions {
     xor{a:Value,b:Value},
 }
 struct AstNode {
-    value:TokenType,
+    value:String,
 }
 impl AstNode {
-    fn new(v:TokenType) -> Self {
+    fn new(v:String) -> Self {
         Self {
             value:v,
         }
     }
 }
-fn create_ast () {
-    let mut original_file:String = fs::read_to_string("lexed.frl").expect("cant find lexed file");
-    let file:String = original_file.replace(&[']','['],"");
+pub fn create_ast () {
+    let original_file:String = fs::read_to_string("lexed.frl").expect("cant find lexed file");
+    let no_token_file:String = original_file.replace("Token","");
+    let file:String = no_token_file.replace(&[']','[','\"',],"");
+    let mut file_iter = file.chars().into_iter();
+    let mut i = 0;
+    while i != file.len() {  i+= 1; file_iter.next(); }
+}
+fn get_nearest_Type () {
+
 }
