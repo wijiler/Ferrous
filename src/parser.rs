@@ -1,6 +1,6 @@
 use std::fs;
 use crate::token::TokenType;
-
+use aho_corasick::AhoCorasick;
 enum Registers64{
     // temp/return
     rax{value:Value},
@@ -63,12 +63,6 @@ impl AstNode {
     }
 }
 pub fn create_ast () {
-    let original_file:String = fs::read_to_string("lexed.frl").expect("cant find lexed file");
-    let no_token_file:String = original_file.replace("Token","");
-    let file:String = no_token_file.replace(&[']','[','\"',],"");
-    let mut file_iter = file.chars().into_iter();
-    let mut i = 0;
-    while i != file.len() {  i+= 1; file_iter.next(); }
 }
 fn get_nearest_Type () {
 
