@@ -2,7 +2,7 @@
 pub enum TokenType {
 // Gates
 Or = 29, 
-Not = 30, // too lazy to delete just wont be used replaced by Bang
+Not = 30,
 XOr = 31,
 And = 32,
 
@@ -10,8 +10,8 @@ And = 32,
 Identifier = 0,
 STRING = 1,
 CHAR = 37,
-Int = 2,
-Float = 38,
+IntNumber = 2,
+FloatNumber = 38,
 
 
 // keywords

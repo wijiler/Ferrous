@@ -288,14 +288,14 @@ use std::{fs::File, io::Write};
                        while self.peek_next_token() != ';' { self.counter += 1;nextnum.push(self.get_current_char());  }
                        let s:String = nextnum.iter().collect();
                        if !s.contains('.') {
-                       tokens.push(Token::new(TokenType::Int,s)); 
+                       tokens.push(Token::new(TokenType::IntNumber,s)); 
                        nextnum.clear();
                        }
                        else if s.matches('.').count() > 1 {
                            println!("type float cannot have more than one decimal point");
                            return;
                        }
-                       else { tokens.push(Token::new(TokenType::Float,s)); nextnum.clear(); }
+                       else { tokens.push(Token::new(TokenType::FloatNumber,s)); nextnum.clear(); }
                     },
                     '.' => { nextnum.push(self.get_current_char()); },
                         _ => (), // we will let the parser do this

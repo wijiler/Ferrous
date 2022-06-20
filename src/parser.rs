@@ -64,6 +64,10 @@ impl AstNode {
 }
 pub fn create_ast () {
 }
-fn get_nearest_Type () {
+fn get_nearest_Type (s:String) {
+    // substrings to find 
+    let dictionary = &["Not","Or","XOr","Not","And","Identifier","STRING","CHAR","IntNumber","FloatNumber","Res_Bool","Res_Int","Res_Uint","Res_Char","Res_Float","Res_String","Res_Function","Bang","Equal","Larrow","LParen","Rarrow","Rparen","Add","Subtract","Modulo","Divide","Multiply","SemiColon","Colon","Comma"];
+// matches array 
+let mut matches = vec![];
 
 }
