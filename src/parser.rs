@@ -54,11 +54,13 @@ use aho_corasick::AhoCorasick;
 //}
 struct AstNode {
     value:String,
+    children:Vec<AstNode>,
 }
 impl AstNode {
-    fn new(v:String) -> Self {
+    fn new(v:String,children:Vec<AstNode>) -> Self {
         Self {
             value:v,
+            children:children,
         }
     }
 }
@@ -67,16 +69,27 @@ pub fn create_ast () {
     let types = get_types(file);
     if !types.contains(&31) {
         println!("\nNo Entrypoint found consider adding \"!!\" after your main function declaration");
-        exit(0);
+        exit(1);
     }
+    let mut i = 0;
+    let mut ast:Vec<AstNode>;
     match types[0] {
+        0..=5 => {
+            println!("FATAL ERROR: during parsing: file cannot begin with !,|,^,&,!&,or an Identifier");
+            exit(1);
+        },
+        17..=30 => {
+            println!("FATAL ERROR: druing parsing: file cannot begin with !,=,<,>,(,),+,-,%,/,*,;,:,or \",\"");
+            exit(1);
+        }
         _ => (),
     }
+    let typesiter = types.iter();
 println!("\n{:?}",types);
 }
 fn get_types (s:String) -> Vec<usize> {
     // substrings to find 
-    let dictionary = &["Not","Or","XOr","Not","And","Identifier","STRING","CHAR","IntNumber","FloatNumber","Res_Bool","Res_Int","Res_Uint","Res_Char","Res_Float","Res_String","Res_Function","Bang","Equal","Larrow","LParen","Rarrow","Rparen","Add","Subtract","Modulo","Divide","Multiply","SemiColon","Colon","Comma","Main"];
+    let dictionary = &["Not","Or","XOr","Nand","And","Identifier","STRING","CHAR","IntNumber","FloatNumber","Res_Bool","Res_Int","Res_Uint","Res_Char","Res_Float","Res_String","Res_Function","Bang","Equal","Larrow","LParen","Rarrow","Rparen","Add","Subtract","Modulo","Divide","Multiply","SemiColon","Colon","Comma","Main"];
 
 let mat = AhoCorasick::new(dictionary);
 
