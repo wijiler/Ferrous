@@ -50,7 +50,7 @@ use std::{fs::File, io::Write};
                             nextchars.push(self.get_current_char());
                             self.counter += 1;
                         }
-                        tokens.push(Token::new(TokenType::STRING,nextchars.iter().collect()));
+                        tokens.push(Token::new(TokenType::StringL,nextchars.iter().collect()));
                       },
                       '\'' => {
                         self.counter += 1;
@@ -61,7 +61,7 @@ use std::{fs::File, io::Write};
                         }
                         if nextchars.len() > 1 { println!("char can only hold 1 character"); return; }
                         else {
-                        tokens.push(Token::new(TokenType::CHAR,nextchars.iter().collect()));
+                        tokens.push(Token::new(TokenType::CharL,nextchars.iter().collect()));
                         }
                       },
 

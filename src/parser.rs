@@ -54,12 +54,12 @@ use aho_corasick::AhoCorasick;
 //}
 struct AstNode {
     value:String,
-    children:Vec<AstNode>,
+    children:Option<Vec<AstNode>>,
 }
 impl AstNode {
-    fn new(v:String,children:Vec<AstNode>) -> Self {
+    fn new(v:&str,children:Option<Vec<AstNode>>) -> Self {
         Self {
-            value:v,
+            value:v.to_owned(),
             children:children,
         }
     }
@@ -74,14 +74,17 @@ pub fn create_ast () {
     let mut i = 0;
     let mut ast:Vec<AstNode>;
     match types[0] {
-        0..=5 => {
-            println!("FATAL ERROR: during parsing: file cannot begin with !,|,^,&,!&,or an Identifier");
+        0..=9 => {
+            println!("FATAL ERROR: during parsing: file cannot begin with !,|,^,&,!&,string,A char,an int or a float,or an Identifier");
             exit(1);
         },
-        17..=30 => {
-            println!("FATAL ERROR: druing parsing: file cannot begin with !,=,<,>,(,),+,-,%,/,*,;,:,or \",\"");
+        17..=31 => {
+            println!("FATAL ERROR: during parsing: file cannot begin with !,=,<,>,(,),+,-,%,/,*,;,:,!!,or \",\"");
             exit(1);
-        }
+        },
+        10 => {
+            AstNode::new("type_bool",None);
+            },
         _ => (),
     }
     let typesiter = types.iter();
@@ -89,14 +92,27 @@ println!("\n{:?}",types);
 }
 fn get_types (s:String) -> Vec<usize> {
     // substrings to find 
-    let dictionary = &["Not","Or","XOr","Nand","And","Identifier","STRING","CHAR","IntNumber","FloatNumber","Res_Bool","Res_Int","Res_Uint","Res_Char","Res_Float","Res_String","Res_Function","Bang","Equal","Larrow","LParen","Rarrow","Rparen","Add","Subtract","Modulo","Divide","Multiply","SemiColon","Colon","Comma","Main"];
+    let dictionary = &["Not","Or","XOr","Nand","And","Identifier","StringL","CharL","IntNumber","FloatNumber","Res_Bool","Res_Int","Res_Uint","Res_Char","Res_Float","Res_String","Res_Function","Bang","Equal","Larrow","LParen","Rarrow","Rparen","Add","Subtract","Modulo","Divide","Multiply","SemiColon","Colon","Comma","Main"];
 
 let mat = AhoCorasick::new(dictionary);
 
 // matches array 
 let mut matches:Vec<usize> = vec![];
+// get matches
 for m in mat.find_iter(&s) {
     matches.push(m.pattern());
     }
     return matches;
+}
+fn get_identifiers(s:String) -> Vec<String> {
+    let new_string = &s.replace(",","").replace("as_literal:","");
+    let dictionary = &["Identifier"];
+    let ac = AhoCorasick::new(dictionary);
+let mut matches:Vec<usize> = vec![];
+for m in ac.find_iter(&new_string) {
+    matches.push(m.end());
+    }
+let matches_iter = matches.into_iter();
+
+return vec!["something".to_owned(),"test".to_owned()]
 }
