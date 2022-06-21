@@ -1,5 +1,5 @@
 // discard this please
-func sayWhatGilbertIs(Something:String) {
+func sayWhatGilbertIs(String Something) {
 	printnl(Something);
 }
 func main !! () {

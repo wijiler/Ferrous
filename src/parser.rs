@@ -66,12 +66,12 @@ impl AstNode {
 }
 pub fn create_ast () {
     let file:String = fs::read_to_string("lexed.frl").expect("cant find lexed file");
-    let types = get_types(file);
+    let types = get_types(&file);
+    let identifiers = get_identifiers(&file);
     if !types.contains(&31) {
         println!("\nNo Entrypoint found consider adding \"!!\" after your main function declaration");
         exit(1);
     }
-    let mut i = 0;
     let mut ast:Vec<AstNode>;
     match types[0] {
         0..=9 => {
@@ -88,9 +88,9 @@ pub fn create_ast () {
         _ => (),
     }
     let typesiter = types.iter();
-println!("\n{:?}",types);
+println!("\n types:{:?},identifiers: {:?}",types,identifiers);
 }
-fn get_types (s:String) -> Vec<usize> {
+fn get_types (s:&String) -> Vec<usize> {
     // substrings to find 
     let dictionary = &["Not","Or","XOr","Nand","And","Identifier","StringL","CharL","IntNumber","FloatNumber","Res_Bool","Res_Int","Res_Uint","Res_Char","Res_Float","Res_String","Res_Function","Bang","Equal","Larrow","LParen","Rarrow","Rparen","Add","Subtract","Modulo","Divide","Multiply","SemiColon","Colon","Comma","Main"];
 
@@ -104,7 +104,7 @@ for m in mat.find_iter(&s) {
     }
     return matches;
 }
-fn get_identifiers(s:String) -> Vec<String> {
+fn get_identifiers(s:&String) -> Vec<String> {
     let new_string = &s.replace(",","").replace("as_literal:","");
     let dictionary = &["Identifier"];
     let ac = AhoCorasick::new(dictionary);
@@ -112,7 +112,16 @@ let mut matches:Vec<usize> = vec![];
 for m in ac.find_iter(&new_string) {
     matches.push(m.end());
     }
-let matches_iter = matches.into_iter();
-
-return vec!["something".to_owned(),"test".to_owned()]
+    let mut identifiers:Vec<String> = vec![];
+    let mut nextchars:Vec<char> = vec![]; 
+    for (_i,el) in matches.iter().enumerate() {
+           let mut ael:usize = *el as usize + 3;
+           while new_string.as_bytes()[ael] as char != '"' {
+                    nextchars.push(new_string.as_bytes()[ael] as char);
+                    ael += 1;
+           }
+           identifiers.push(nextchars.clone().into_iter().collect());
+           nextchars.clear();
+    }
+    identifiers // return all the Identifiers
 }
