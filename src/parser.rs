@@ -68,6 +68,7 @@ pub fn create_ast () {
     let file:String = fs::read_to_string("lexed.frl").expect("cant find lexed file");
     let types = get_types(&file);
     let identifiers = get_identifiers(&file);
+    let falsiesandtruseys = GetBools(&file); // no need to name it this but I like the word falsies :^)
     if !types.contains(&31) {
         println!("\nNo Entrypoint found consider adding \"!!\" after your main function declaration");
         exit(1);
@@ -83,7 +84,9 @@ pub fn create_ast () {
             exit(1);
         },
         10 => {
-            AstNode::new("type_bool",None);
+            let node = AstNode::new("type_bool",vec![AstNode::new(format!("Ident:{}",identifiers[0]),None),
+            AstNode::new(format!("Equals:{}",falsiesandtruseys[0]),None)]);
+
             },
         _ => (),
     }
@@ -124,4 +127,13 @@ for m in ac.find_iter(&new_string) {
            nextchars.clear();
     }
     identifiers // return all the Identifiers
+}
+fn GetBools(s:&String) -> Vec<usize> {
+    let dictionary = &["True","False"];
+    let  ac = AhoCorasick::new(dictionary);
+let mut matches:Vec<usize> = vec![];
+for m in ac.find_iter(s) {
+    matches.push(m.pattern());
+    }
+matches
 }
