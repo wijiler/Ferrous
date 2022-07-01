@@ -1,60 +1,57 @@
 #[derive(Debug)]
 pub enum TokenType {
-// Gates
-Or = 29, 
-Not = 30,
-XOr = 31,
-And = 32,
+    // Gates
+    Or = 29,
+    Not = 30,
+    XOr = 31,
+    And = 32,
 
+    Identifier = 0,
+    StringL = 1,
+    CharL = 37,
+    IntNumber = 2,
+    FloatNumber = 38,
 
-Identifier = 0,
-StringL = 1,
-CharL = 37,
-IntNumber = 2,
-FloatNumber = 38,
+    // keywords
+    Res_Bool = 5,
+    Res_Int = 6,
+    Res_Uint = 7,
+    Res_Char = 8,
+    Res_String = 9,
+    Res_Float = 28,
+    Res_If = 24,
+    Res_Else = 26,
+    Res_Switch = 25,
+    Res_type = 27,
+    Res_Function = 35,
 
+    True = 33,
+    False = 34,
 
-// keywords
-Res_Bool = 5,
-Res_Int = 6,
-Res_Uint = 7,
-Res_Char = 8,
-Res_String = 9,
-Res_Float = 28,
-Res_If = 24,
-Res_Else = 26,
-Res_Switch = 25,
-Res_type = 27,
-Res_Function = 35,
+    // symbols and operators
+    Bang = 10,
+    Larrow = 11,
+    Rarrow = 12,
+    Main = 36,
+    LParen = 13,
+    Rparen = 14,
+    Equal = 15,
+    Add = 16,
+    Subtract = 17,
+    Multiply = 18,
+    Divide = 19,
+    Modulo = 20,
 
-True = 33,
-False = 34,
-
-// symbols and operators
-Bang = 10,
-Larrow = 11,
-Rarrow = 12,
-Main = 36,
-LParen = 13,
-Rparen = 14,
-Equal = 15,
-Add = 16,
-Subtract = 17,
-Multiply = 18,
-Divide = 19,
-Modulo = 20,
-
-// seperators
-SemiColon = 21,
-Colon = 22,
-Comma=23,
-
+    // seperators
+    SemiColon = 21,
+    Colon = 22,
+    Comma = 23,
 }
 /*
 pub enum Tokenvalue {
-    Boolval(bool),    
-    Intval(i64),    
-    Floatval(f64),    
+    Boolval(bool),
+    Intval(i64),
+    Floatval(f64),
     UIntval(u64),
     CharVal(char),
     StringVal{count:u64, data:String}, // make it easier to get the length
@@ -67,15 +64,15 @@ pub enum Tokenvalue {
 */
 #[derive(Debug)]
 pub struct Token {
-    Type:TokenType,
-    as_literal:String,
+    Type: TokenType,
+    as_literal: String,
 }
 impl Token {
-pub fn new(t:TokenType,a:String) -> Self {
-            Self {
-                Type:t,
-                as_literal:a,
-            }
+    pub fn new(t: TokenType, a: String) -> Self {
+        Self {
+            Type: t,
+            as_literal: a,
+        }
     }
 }
 // old code that would never work

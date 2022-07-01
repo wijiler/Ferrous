@@ -5,18 +5,18 @@ enum Errort {
     NoSemiColon,
 }
 /// Call an error
-fn error(e:Errort,line:usize) {
+fn error(e: Errort, line: usize) {
     match e {
         Errort::NoSemiColon => {
-            println!("NoSemiColon at line {}",line);
+            println!("NoSemiColon at line {}", line);
             return;
-         },
+        }
         Errort::NoIdentifier => {
-            println!("NoIdentifier at line {}",line);
+            println!("NoIdentifier at line {}", line);
             return;
-        },
-       Errort::Unknowntoken => {
-            println!("Unknowntoken at line {}",line);
+        }
+        Errort::Unknowntoken => {
+            println!("Unknowntoken at line {}", line);
             return;
         }
     }

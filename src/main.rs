@@ -1,11 +1,12 @@
 /// ferriclang's first line :)
-use std::{env, process,fs};
-
+use std::{env, fs, process};
+#[macro_use]
+extern crate pest_derive;
 // imports
-pub mod token;
+pub mod Error;
 pub mod lexer;
 pub mod pest_parser;
-pub mod Error;
+pub mod token;
 // args handler so you can use the thing
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -23,11 +24,11 @@ fn main() {
             process::exit(0);
         }
         "--comp" | "-c" => {
-        let filename = &args[2];
-        let mut file = fs::read_to_string(filename).unwrap(); 
-//        file.retain(|c| !c.is_whitespace());
-        let mut lexer = lexer::lexer::new(file);
-        lexer.lex();
+            let filename = &args[2];
+            let file = fs::read_to_string(filename).unwrap();
+            //        file.retain(|c| !c.is_whitespace());
+            let mut lexer = lexer::Lexer::new(file);
+            lexer.lex();
         }
         _ => {}
     }
