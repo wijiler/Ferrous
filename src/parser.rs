@@ -84,9 +84,6 @@ pub fn create_ast () {
             exit(1);
         },
         10 => {
-            let node = AstNode::new("type_bool",vec![AstNode::new(format!("Ident:{}",identifiers[0]),None),
-            AstNode::new(format!("Equals:{}",falsiesandtruseys[0]),None)]);
-
             },
         _ => (),
     }

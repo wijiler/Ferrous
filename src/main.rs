@@ -3,8 +3,8 @@ use std::{env, process,fs};
 
 // imports
 pub mod token;
-pub mod parser;
 pub mod lexer;
+pub mod pest_parser;
 pub mod Error;
 // args handler so you can use the thing
 fn main() {
@@ -28,7 +28,6 @@ fn main() {
 //        file.retain(|c| !c.is_whitespace());
         let mut lexer = lexer::lexer::new(file);
         lexer.lex();
-        parser::create_ast();
         }
         _ => {}
     }

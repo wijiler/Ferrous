@@ -303,9 +303,6 @@ use std::{fs::File, io::Write};
                 self.counter += 1;
                         }
             print!("{:?}",tokens);
-            let mut file = File::create("lexed.frl")
-                .expect("Couldnt create final lexed file");
-            write!(file,"{:?}",tokens).expect("Couldnt write final lex");
                     }
                 fn get_current_char(&self) -> char {
                      let cc = self.contents[self.counter]; return cc

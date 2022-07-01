@@ -7,3 +7,4 @@ edition = "2018"
 
 [dependencies]
 aho-corasick = "0.7.18"
+pest = "2.1.3"
