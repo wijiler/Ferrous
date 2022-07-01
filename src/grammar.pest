@@ -1,7 +1,7 @@
-WHITESPACE = _{" "}
+WHITESPACE = _{ (" "|NEWLINE|"\t") }
 semi = { ";"}
 char_lit = { ANY }
-char = { "char" ~ ident ~ "="? ~ "'" ~ char_lit? ~ "'" ~ semi}
+char = { mutable? ~ "char" ~ ident ~ "="? ~ "'" ~ char_lit? ~ "'" ~ semi}
 raw_string = { (!("\\" | "\"") ~ ANY)+ }
 
 hex = _{ '0'..'9' | 'a'..'f' | 'A'..'F' }
@@ -20,29 +20,31 @@ string_lit = { "\"" ~ (raw_string | escape)* ~ "\"" }
 
 ident = {ASCII_ALPHA+}
 
-string = { "String" ~ ident ~ "="? ~ string_lit? ~ semi}
+string = { mutable? ~ "String" ~ ident ~ "="? ~ string_lit? ~ semi}
 
 true_lit = { "true" }
 
 false_lit = { "false" }
 
-bool = { "Bool" ~ ident ~ "="? ~ (true_lit|false_lit)? ~ semi}
+bool = { mutable? ~ "Bool" ~ ident ~ "="? ~ (true_lit|false_lit)? ~ semi}
 
 int_lit = @{ "-"? ~ ASCII_DIGIT+ }
-int = { "Int" ~ ident ~ "="? ~ int_lit? ~ semi}
+int = { mutable? ~ "Int" ~ ident ~ "="? ~ int_lit? ~ semi}
 
 float_lit = @{ "-"? ~ ASCII_DIGIT+ ~ "."? ~ ASCII_DIGIT+? }
-float = { "Float" ~ ident ~ "="? ~ float_lit? ~ semi }
+float = { mutable? ~ "Float" ~ ident ~ "="? ~ float_lit? ~ semi }
 
-uint_lit = @{!"-" ~ ASCII_DIGIT+}
-uint = { "uint" ~ ident ~ "="? ~ uint_lit? ~ semi } // lowercase names for most basic versions of types
+uint_lit = @{ ASCII_DIGIT+}
+uint = { mutable? ~ "uint" ~ ident ~ "="? ~ uint_lit? ~ semi } // lowercase names for most basic versions of types
 
 leftparen= {"("}
 rightparen= {")"}
-args = { leftparen ~ expression* ~ rightparen }
+args = { "(" ~ expression* ~ ")" }
 leftbrack = {"{"}
 rightbrack = {"}"}
 entrypoint = { "!!" }
+mutable = { "mut" }
 function = {"func" ~ ident ~ entrypoint? ~ args ~ leftbrack ~ expression* ~ rightbrack  }
-//expression = { (char|string|bool|int|float|uint|function) }
-//program = {expression+}
+expression = { (char|string|bool|int|float|uint|function) }
+program = {expression+}
+
