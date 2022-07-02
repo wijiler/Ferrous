@@ -325,7 +325,30 @@ impl Lexer {
                 '.' => {
                     nextnum.push(self.get_current_char());
                 }
-                _ => (), // we will let the parser do this
+                'm' => {
+                    if self.peek_next_token() == 'u' {
+                        self.counter += 1;
+                        if self.peek_next_token() == 't' {
+                           self.counter += 1;
+                           if !self.peek_next_token().is_whitespace() {
+                            self.counter +=1;
+                           }
+                           else { 
+                           tokens.push(TokenType::Mutable); 
+                           self.counter += 1;
+                           }
+                        }
+                        else { continue;}
+                    }
+                    else {continue;}
+                }
+             '{' => {
+                tokens.push(TokenType::Lbrack);
+             }
+             '}' => {
+                 tokens.push(TokenType::Rbrack);
+             }
+                _ => (),
             }
             self.counter += 1;
         }

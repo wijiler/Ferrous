@@ -1,4 +1,3 @@
 WHITESPACE = _{(" "|NEWLINE|"\t")}
 brackets = _{("{"|"}"|"["|"]")}
-otherthings = _{("Type:"|"Token"|"as_literal")}
-
+function = { "Res_Func" }

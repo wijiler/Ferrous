@@ -14,6 +14,7 @@ pub enum TokenType {
 
     // keywords
     Res_Bool ,
+    Mutable,
     Res_Int ,
     Res_Uint ,
     Res_Char ,
@@ -41,6 +42,8 @@ pub enum TokenType {
     Multiply ,
     Divide ,
     Modulo ,
+    Rbrack ,
+    Lbrack ,
 
     // seperators
     SemiColon ,
