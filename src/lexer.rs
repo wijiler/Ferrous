@@ -11,10 +11,10 @@ impl Lexer {
             counter: 0,
         }
     }
-    pub fn lex(&mut self) -> Vec<Token> {
+    pub fn lex(&mut self) -> Vec<TokenType> {
         let mut nextnum: Vec<char> = Vec::new();
         let clength = self.contents.len();
-        let mut tokens: Vec<Token> = Vec::new();
+        let mut tokens: Vec<TokenType> = Vec::new();
         while self.counter < clength {
             match self.get_current_char() {
                 'f' => {
@@ -28,17 +28,16 @@ impl Lexer {
                     }
                     let s: String = nextchars.iter().collect();
                     if s == "func" {
-                        tokens.push(Token::new(TokenType::Res_Function, "func".to_owned()));
+                        tokens.push(TokenType::Res_Function);
                         self.skip_white_space();
                         while self.get_current_char().is_alphabetic() {
                             nextchars2.push(self.get_current_char());
                             self.counter += 1
                         }
                         if nextchars2 != [' '] || nextchars2 != ['\0'] {
-                            tokens.push(Token::new(
-                                TokenType::Identifier,
-                                nextchars2.iter().collect(),
-                            ));
+                            tokens.push(
+                                TokenType::Identifier{name:nextchars2.iter().collect()},
+                            );
                         } else {
                             panic!("somewhere your forgor to put identifier for a function");
                         }
@@ -53,7 +52,7 @@ impl Lexer {
                         nextchars.push(self.get_current_char());
                         self.counter += 1;
                     }
-                    tokens.push(Token::new(TokenType::StringL, nextchars.iter().collect()));
+                    tokens.push(TokenType::StringL{value:nextchars.iter().collect()});
                 }
                 '\'' => {
                     self.counter += 1;
@@ -66,7 +65,7 @@ impl Lexer {
                         panic!("char can only hold 1 character");
                         
                     } else {
-                        tokens.push(Token::new(TokenType::CharL, nextchars.iter().collect()));
+                        tokens.push(TokenType::CharL{value:nextchars.iter().collect()});
                     }
                 }
 
@@ -81,17 +80,16 @@ impl Lexer {
                     }
                     let s: String = nextchars.iter().collect();
                     if s == "String" {
-                        tokens.push(Token::new(TokenType::Res_String, "String".to_owned()));
+                        tokens.push(TokenType::Res_String);
                         self.skip_white_space();
                         while self.get_current_char().is_alphabetic() {
                             nextchars2.push(self.get_current_char());
                             self.counter += 1
                         }
                         if nextchars2 != [' '] || nextchars2 != ['\0'] {
-                            tokens.push(Token::new(
-                                TokenType::Identifier,
-                                nextchars2.iter().collect(),
-                            ));
+                            tokens.push(
+                                TokenType::Identifier{name:nextchars2.iter().collect()}
+                            );
                         } else {
                             panic!("somewhere your forgor to put identifier for a String");
                             
@@ -111,17 +109,16 @@ impl Lexer {
                     }
                     let s: String = nextchars.iter().collect();
                     if s == "Int" {
-                        tokens.push(Token::new(TokenType::Res_Int, "Int".to_owned()));
+                        tokens.push(TokenType::Res_Int);
                         self.skip_white_space();
                         while self.get_current_char().is_alphabetic() {
                             nextchars2.push(self.get_current_char());
                             self.counter += 1
                         }
                         if nextchars2 != [' '] || nextchars2 != ['\0'] {
-                            tokens.push(Token::new(
-                                TokenType::Identifier,
-                                nextchars2.iter().collect(),
-                            ));
+                            tokens.push(
+                                TokenType::Identifier{name:nextchars2.iter().collect()}
+                            );
                         } else {
                             panic!("somewhere your forgor to put identifier for an Interger");
                             
@@ -141,17 +138,16 @@ impl Lexer {
                     }
                     let s: String = nextchars.iter().collect();
                     if s == "Bool" {
-                        tokens.push(Token::new(TokenType::Res_Bool, "Bool".to_owned()));
+                        tokens.push(TokenType::Res_Bool);
                         self.skip_white_space();
                         while self.get_current_char().is_alphabetic() {
                             nextchars2.push(self.get_current_char());
                             self.counter += 1
                         }
                         if nextchars2 != [' '] || nextchars2 != ['\0'] {
-                            tokens.push(Token::new(
-                                TokenType::Identifier,
-                                nextchars2.iter().collect(),
-                            ));
+                            tokens.push(
+                                TokenType::Identifier{name:nextchars2.iter().collect()}
+                            );
                         } else {
                             panic!("somewhere your forgor to put identifier for a Boolean");
                             
@@ -171,17 +167,16 @@ impl Lexer {
                     }
                     let s: String = nextchars.iter().collect();
                     if s == "Char" {
-                        tokens.push(Token::new(TokenType::Res_Char, "Char".to_owned()));
+                        tokens.push(TokenType::Res_Char);
                         self.skip_white_space();
                         while self.get_current_char().is_alphabetic() {
                             nextchars2.push(self.get_current_char());
                             self.counter += 1
                         }
                         if nextchars2 != [' '] || nextchars2 != ['\0'] {
-                            tokens.push(Token::new(
-                                TokenType::Identifier,
-                                nextchars2.iter().collect(),
-                            ));
+                            tokens.push(
+                                TokenType::Identifier{name:nextchars2.iter().collect()}
+                            );
                         } else {
                             panic!("somewhere your forgor to put identifier for a char");
                             
@@ -201,17 +196,16 @@ impl Lexer {
                     }
                     let s: String = nextchars.iter().collect();
                     if s == "UInt" {
-                        tokens.push(Token::new(TokenType::Res_Uint, "UInt".to_owned()));
+                        tokens.push(TokenType::Res_Uint);
                         self.skip_white_space();
                         while self.get_current_char().is_alphabetic() {
                             nextchars2.push(self.get_current_char());
                             self.counter += 1
                         }
                         if nextchars2 != [' '] || nextchars2 != ['\0'] {
-                            tokens.push(Token::new(
-                                TokenType::Identifier,
-                                nextchars2.iter().collect(),
-                            ));
+                            tokens.push(
+                                TokenType::Identifier{name:nextchars2.iter().collect()}
+                            );
                         } else {
                             panic!("somewhere your forgor to put identifier for a uint");
                             
@@ -231,17 +225,16 @@ impl Lexer {
                     }
                     let s: String = nextchars.iter().collect();
                     if s == "Float" {
-                        tokens.push(Token::new(TokenType::Res_Float, "Float".to_owned()));
+                        tokens.push(TokenType::Res_Float);
                         self.skip_white_space();
                         while self.get_current_char().is_alphabetic() {
                             nextchars2.push(self.get_current_char());
                             self.counter += 1
                         }
                         if nextchars2 != [' '] || nextchars2 != ['\0'] {
-                            tokens.push(Token::new(
-                                TokenType::Identifier,
-                                nextchars2.iter().collect(),
-                            ));
+                            tokens.push(
+                                TokenType::Identifier{name:nextchars2.iter().collect()}
+                            );
                         } else {
                             panic!("somewhere your forgor to put identifier for a float");
                             
@@ -251,7 +244,7 @@ impl Lexer {
                     }
                 }
                 '=' => {
-                    tokens.push(Token::new(TokenType::Equal, "=".to_owned()));
+                    tokens.push(TokenType::Equal);
                 }
                 '/' => {
                     if self.peek_next_token() == '/' {
@@ -260,55 +253,54 @@ impl Lexer {
                         }
                         continue;
                     } else {
-                        tokens.push(Token::new(TokenType::Divide, "/".to_owned()));
+                        tokens.push(TokenType::Divide);
                     }
                 }
                 '>' => {
-                    tokens.push(Token::new(TokenType::Rarrow, ">".to_owned()));
+                    tokens.push(TokenType::Rarrow);
                 }
                 '<' => {
-                    tokens.push(Token::new(TokenType::Larrow, "<".to_owned()));
+                    tokens.push(TokenType::Larrow);
                 }
                 '(' => {
-                    tokens.push(Token::new(TokenType::LParen, "(".to_owned()));
-                    let mut nextchars: Vec<char> = Vec::new();
-                    // while self.get_current_char().is_alphabetic() {nextchars.push(self.get_current_char()); self.counter += 1;} // this is important for the parser
+                    tokens.push(TokenType::LParen);
                 }
                 ')' => {
-                    tokens.push(Token::new(TokenType::Rparen, ")".to_owned()));
+                    tokens.push(TokenType::Rparen);
                 }
                 '!' => {
                     if self.peek_next_token() == '!' {
-                        tokens.push(Token::new(TokenType::Main, "Entrypoint".to_owned()));
+                        tokens.push(TokenType::Main);
                         self.counter += 1;
-                    } else {
-                        tokens.push(Token::new(TokenType::Bang, "!".to_owned()));
+                    } 
+                    else {
+                        tokens.push(TokenType::Bang);
                     }
                 }
                 '+' => {
-                    tokens.push(Token::new(TokenType::Add, "+".to_owned()));
+                    tokens.push(TokenType::Add);
                 }
 
                 '-' => {
-                    tokens.push(Token::new(TokenType::Subtract, "-".to_owned()));
+                    tokens.push(TokenType::Subtract);
                 }
                 '*' => {
-                    tokens.push(Token::new(TokenType::Multiply, "*".to_owned()));
+                    tokens.push(TokenType::Multiply);
                 }
                 '&' => {
                     if self.peek_next_token() == '&' {
-                        tokens.push(Token::new(TokenType::And, "&&".to_owned()));
+                        tokens.push(TokenType::And);
                         self.counter += 2;
                     } else {
-                        tokens.push(Token::new(TokenType::And, "&".to_owned()));
+                        tokens.push(TokenType::And);
                     }
                 }
                 '|' => {
                     if self.peek_next_token() == '|' {
-                        tokens.push(Token::new(TokenType::Or, "||".to_owned()));
+                        tokens.push(TokenType::Or);
                         self.counter += 2;
                     } else {
-                        tokens.push(Token::new(TokenType::Or, "|".to_owned()));
+                        tokens.push(TokenType::Or);
                     }
                 }
                 '0'..='9' => {
@@ -320,13 +312,13 @@ impl Lexer {
                     }
                     let s: String = nextnum.iter().collect();
                     if !s.contains('.') {
-                        tokens.push(Token::new(TokenType::IntNumber, s));
+                        tokens.push(TokenType::IntNumber{value:s});
                         nextnum.clear();
                     } else if s.matches('.').count() > 1 {
                         panic!("type float cannot have more than one decimal point");
                         
                     } else {
-                        tokens.push(Token::new(TokenType::FloatNumber, s));
+                        tokens.push(TokenType::FloatNumber{value:s});
                         nextnum.clear();
                     }
                 }
@@ -354,7 +346,7 @@ impl Lexer {
     }
     pub fn peek_next_token(&self) -> char {
         let counter = &self.counter + 1;
-        let cc: char = self.contents[counter.to_owned()];
+        let cc: char = self.contents[counter];
         return cc;
     }
 }
