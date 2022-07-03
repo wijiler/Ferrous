@@ -156,7 +156,7 @@ impl Lexer {
                         continue;
                     }
                 }
-                'c' => {
+                'C' => {
                     let mut nextchars: Vec<char> = Vec::new();
                     let mut nextchars2: Vec<char> = Vec::new();
                     let mut i: usize = 0;
@@ -166,7 +166,7 @@ impl Lexer {
                         self.counter += 1;
                     }
                     let s: String = nextchars.iter().collect();
-                    if s == "char" {
+                    if s == "Char" {
                         tokens.push(TokenType::Res_Char);
                         self.skip_white_space();
                         while self.get_current_char().is_alphabetic() {
@@ -185,7 +185,7 @@ impl Lexer {
                         continue;
                     }
                 }
-                'u' => {
+                'U' => {
                     let mut nextchars: Vec<char> = Vec::new();
                     let mut nextchars2: Vec<char> = Vec::new();
                     let mut i: usize = 0;
@@ -195,7 +195,7 @@ impl Lexer {
                         self.counter += 1;
                     }
                     let s: String = nextchars.iter().collect();
-                    if s == "uInt" {
+                    if s == "UInt" {
                         tokens.push(TokenType::Res_Uint);
                         self.skip_white_space();
                         while self.get_current_char().is_alphabetic() {

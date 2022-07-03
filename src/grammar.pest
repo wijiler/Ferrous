@@ -1,0 +1,3 @@
+WHITESPACE = _{(" "|NEWLINE|"\t")}
+brackets = _{("{"|"}"|"["|"]")}
+function = { "Res_Func" }
