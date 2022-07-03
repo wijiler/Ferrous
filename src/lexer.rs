@@ -1,5 +1,5 @@
 use crate::token::*;
-use std::{fs::File, io::Write};
+//use std::{fs::File, io::Write};
 pub struct Lexer {
     contents: Vec<char>,
     counter: usize,
@@ -35,9 +35,9 @@ impl Lexer {
                             self.counter += 1
                         }
                         if nextchars2 != [' '] || nextchars2 != ['\0'] {
-                            tokens.push(
-                                TokenType::Identifier{name:nextchars2.iter().collect()},
-                            );
+                            tokens.push(TokenType::Identifier {
+                                name: nextchars2.iter().collect(),
+                            });
                         } else {
                             panic!("somewhere your forgor to put identifier for a function");
                         }
@@ -52,7 +52,9 @@ impl Lexer {
                         nextchars.push(self.get_current_char());
                         self.counter += 1;
                     }
-                    tokens.push(TokenType::StringL{value:nextchars.iter().collect()});
+                    tokens.push(TokenType::StringL {
+                        value: nextchars.iter().collect(),
+                    });
                 }
                 '\'' => {
                     self.counter += 1;
@@ -63,9 +65,10 @@ impl Lexer {
                     }
                     if nextchars.len() > 1 {
                         panic!("char can only hold 1 character");
-                        
                     } else {
-                        tokens.push(TokenType::CharL{value:nextchars.iter().collect()});
+                        tokens.push(TokenType::CharL {
+                            value: nextchars.iter().collect(),
+                        });
                     }
                 }
 
@@ -87,12 +90,11 @@ impl Lexer {
                             self.counter += 1
                         }
                         if nextchars2 != [' '] || nextchars2 != ['\0'] {
-                            tokens.push(
-                                TokenType::Identifier{name:nextchars2.iter().collect()}
-                            );
+                            tokens.push(TokenType::Identifier {
+                                name: nextchars2.iter().collect(),
+                            });
                         } else {
                             panic!("somewhere your forgor to put identifier for a String");
-                            
                         }
                     } else {
                         continue;
@@ -116,12 +118,11 @@ impl Lexer {
                             self.counter += 1
                         }
                         if nextchars2 != [' '] || nextchars2 != ['\0'] {
-                            tokens.push(
-                                TokenType::Identifier{name:nextchars2.iter().collect()}
-                            );
+                            tokens.push(TokenType::Identifier {
+                                name: nextchars2.iter().collect(),
+                            });
                         } else {
                             panic!("somewhere your forgor to put identifier for an Interger");
-                            
                         }
                     } else {
                         continue;
@@ -145,18 +146,17 @@ impl Lexer {
                             self.counter += 1
                         }
                         if nextchars2 != [' '] || nextchars2 != ['\0'] {
-                            tokens.push(
-                                TokenType::Identifier{name:nextchars2.iter().collect()}
-                            );
+                            tokens.push(TokenType::Identifier {
+                                name: nextchars2.iter().collect(),
+                            });
                         } else {
                             panic!("somewhere your forgor to put identifier for a Boolean");
-                            
                         }
                     } else {
                         continue;
                     }
                 }
-                'C' => {
+                'c' => {
                     let mut nextchars: Vec<char> = Vec::new();
                     let mut nextchars2: Vec<char> = Vec::new();
                     let mut i: usize = 0;
@@ -166,7 +166,7 @@ impl Lexer {
                         self.counter += 1;
                     }
                     let s: String = nextchars.iter().collect();
-                    if s == "Char" {
+                    if s == "char" {
                         tokens.push(TokenType::Res_Char);
                         self.skip_white_space();
                         while self.get_current_char().is_alphabetic() {
@@ -174,18 +174,17 @@ impl Lexer {
                             self.counter += 1
                         }
                         if nextchars2 != [' '] || nextchars2 != ['\0'] {
-                            tokens.push(
-                                TokenType::Identifier{name:nextchars2.iter().collect()}
-                            );
+                            tokens.push(TokenType::Identifier {
+                                name: nextchars2.iter().collect(),
+                            });
                         } else {
                             panic!("somewhere your forgor to put identifier for a char");
-                            
                         }
                     } else {
                         continue;
                     }
                 }
-                'U' => {
+                'u' => {
                     let mut nextchars: Vec<char> = Vec::new();
                     let mut nextchars2: Vec<char> = Vec::new();
                     let mut i: usize = 0;
@@ -195,7 +194,7 @@ impl Lexer {
                         self.counter += 1;
                     }
                     let s: String = nextchars.iter().collect();
-                    if s == "UInt" {
+                    if s == "uInt" {
                         tokens.push(TokenType::Res_Uint);
                         self.skip_white_space();
                         while self.get_current_char().is_alphabetic() {
@@ -203,12 +202,11 @@ impl Lexer {
                             self.counter += 1
                         }
                         if nextchars2 != [' '] || nextchars2 != ['\0'] {
-                            tokens.push(
-                                TokenType::Identifier{name:nextchars2.iter().collect()}
-                            );
+                            tokens.push(TokenType::Identifier {
+                                name: nextchars2.iter().collect(),
+                            });
                         } else {
                             panic!("somewhere your forgor to put identifier for a uint");
-                            
                         }
                     } else {
                         continue;
@@ -232,12 +230,11 @@ impl Lexer {
                             self.counter += 1
                         }
                         if nextchars2 != [' '] || nextchars2 != ['\0'] {
-                            tokens.push(
-                                TokenType::Identifier{name:nextchars2.iter().collect()}
-                            );
+                            tokens.push(TokenType::Identifier {
+                                name: nextchars2.iter().collect(),
+                            });
                         } else {
                             panic!("somewhere your forgor to put identifier for a float");
-                            
                         }
                     } else {
                         continue;
@@ -256,6 +253,12 @@ impl Lexer {
                         tokens.push(TokenType::Divide);
                     }
                 }
+                ':' => {
+                    tokens.push(TokenType::Colon)
+                }
+                ',' => {
+                    tokens.push(TokenType::Comma);
+                }
                 '>' => {
                     tokens.push(TokenType::Rarrow);
                 }
@@ -272,8 +275,7 @@ impl Lexer {
                     if self.peek_next_token() == '!' {
                         tokens.push(TokenType::Main);
                         self.counter += 1;
-                    } 
-                    else {
+                    } else {
                         tokens.push(TokenType::Bang);
                     }
                 }
@@ -312,13 +314,12 @@ impl Lexer {
                     }
                     let s: String = nextnum.iter().collect();
                     if !s.contains('.') {
-                        tokens.push(TokenType::IntNumber{value:s});
+                        tokens.push(TokenType::IntNumber { value: s });
                         nextnum.clear();
                     } else if s.matches('.').count() > 1 {
                         panic!("type float cannot have more than one decimal point");
-                        
                     } else {
-                        tokens.push(TokenType::FloatNumber{value:s});
+                        tokens.push(TokenType::FloatNumber { value: s });
                         nextnum.clear();
                     }
                 }
@@ -329,25 +330,26 @@ impl Lexer {
                     if self.peek_next_token() == 'u' {
                         self.counter += 1;
                         if self.peek_next_token() == 't' {
-                           self.counter += 1;
-                           if !self.peek_next_token().is_whitespace() {
-                            self.counter +=1;
-                           }
-                           else { 
-                           tokens.push(TokenType::Mutable); 
-                           self.counter += 1;
-                           }
+                            self.counter += 1;
+                            if !self.peek_next_token().is_whitespace() {
+                                self.counter += 1;
+                            } else {
+                                tokens.push(TokenType::Mutable);
+                                self.counter += 1;
+                            }
+                        } else {
+                            continue;
                         }
-                        else { continue;}
+                    } else {
+                        continue;
                     }
-                    else {continue;}
                 }
-             '{' => {
-                tokens.push(TokenType::Lbrack);
-             }
-             '}' => {
-                 tokens.push(TokenType::Rbrack);
-             }
+                '{' => {
+                    tokens.push(TokenType::Lbrack);
+                }
+                '}' => {
+                    tokens.push(TokenType::Rbrack);
+                }
                 _ => (),
             }
             self.counter += 1;
