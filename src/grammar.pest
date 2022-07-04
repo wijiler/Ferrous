@@ -5,7 +5,7 @@ value = _{ "value:" }
 name = { "name:" }
 ident = { "\"" ~ ASCII_ALPHA+ ~ "\"" }
 // types and literals
-string_L = { "\"" ~ !("True"|"False") ~ ASCII_ALPHANUMERIC{2,} ~ "\""}
+string_L = { "\"" ~ ASCII_ALPHANUMERIC{2,} ~ "\""}
 String = { "Res_String" ~ ident ~ "Equal"? ~ "StringL"? ~ value? ~ string_L? }
  
 char_l  = { "\"" ~ ASCII_ALPHANUMERIC ~ "\"" }
@@ -21,9 +21,12 @@ Float_L = { "\"" ~ "-"? ~ ASCII_DIGIT+ ~ "."? ~ ASCII_DIGIT+? ~"\"" }
 Float = { "Res_Float" ~ ident ~ "Equal"? ~ "FloatNumber"? ~ value? ~ Float_L }
 
 //symbols
+lparen = _{ "LParen" }
+rparen = _{ "RParen" }
 
 
 //functions and stuff
+args = { lparen ~ expression* ~ rparen }
 entrypoint = { "Main" }
 
 // run stuff

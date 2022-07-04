@@ -3,7 +3,7 @@ use std::{env, fs, process};
 #[macro_use]
 extern crate pest_derive;
 // imports
-pub mod Error;
+pub mod error;
 pub mod lexer;
 pub mod pest_parser;
 pub mod token;
