@@ -1,6 +1,8 @@
 use crate::lexer::Lexer;
+use crate::token::TokenType;
 
-fn parse (file:String) {
-let mut lexer = Lexer::new(file);
-let lexed = lexer.lex();
+
+fn parse (tokensa:String) {
+let mut lexer = Lexer::new(tokensa);
+let tokens = lexer.lex();
 }
