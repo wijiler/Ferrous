@@ -1,10 +1,11 @@
+use crate::token::TokenType;
 pub enum NodeType {
-    BinaryOp,
+    BinaryOp{a:TokenType,b:TokenType},
     Reserved,
-    Declaration,
+    Declaration{Type:TokenType,ident:String,equal:Box<NodeType>},
     Args,
     Entrypoint,
-    Function{Identifier:String,args:Option<Vec<AstNode>>,contents:Vec<AstNode>},
+    Function{entry:bool,ident:String,args:Option<Vec<AstNode>>,contents:Vec<AstNode>},
     Str{value:String},
     Return{code:bool},
 }
