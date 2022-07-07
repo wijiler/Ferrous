@@ -1,7 +1,6 @@
 use super::astnode::{AstNode,NodeType};
 use crate::token::TokenType;
 use crate::lexer::Lexer;
-use crate::parser::get_ident_by_index;
 struct Ast {
     root:AstNode,
     children:Vec<AstNode>,
