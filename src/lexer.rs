@@ -1,4 +1,5 @@
 use crate::token::*;
+use std::process::exit;
 //use std::{fs::File, io::Write};
 /// token system by me lexer is credited to https://www.youtube.com/channel/UCK6-JHDgbdeXbnTwc2Lj98g
 pub struct Lexer {
@@ -16,6 +17,7 @@ impl Lexer {
         let mut nextnum: Vec<char> = Vec::new();
         let clength = self.contents.len();
         let mut tokens: Vec<TokenType> = Vec::new();
+        let mut identifiers: Vec<String> = Vec::new();
         while self.counter < clength {
             match self.get_current_char() {
                 'f' => {
@@ -39,9 +41,10 @@ impl Lexer {
                             tokens.push(TokenType::Identifier {
                                 name: nextchars2.iter().collect(),
                             });
-                        } else {
+                            identifiers.push(nextchars2.iter().collect());
+                            } else {
                             panic!("somewhere your forgor to put identifier for a function");
-                        }
+                            }
                     } else {
                         continue;
                     }
@@ -94,6 +97,7 @@ impl Lexer {
                             tokens.push(TokenType::Identifier {
                                 name: nextchars2.iter().collect(),
                             });
+                            identifiers.push(nextchars2.iter().collect());
                         } else {
                             panic!("somewhere your forgor to put identifier for a String");
                         }
@@ -122,6 +126,7 @@ impl Lexer {
                             tokens.push(TokenType::Identifier {
                                 name: nextchars2.iter().collect(),
                             });
+                            identifiers.push(nextchars2.iter().collect());
                         } else {
                             panic!("somewhere your forgor to put identifier for an Interger");
                         }
@@ -150,6 +155,7 @@ impl Lexer {
                             tokens.push(TokenType::Identifier {
                                 name: nextchars2.iter().collect(),
                             });
+                            identifiers.push(nextchars2.iter().collect());
                         } else {
                             panic!("somewhere your forgor to put identifier for a Boolean");
                         }
@@ -178,6 +184,7 @@ impl Lexer {
                             tokens.push(TokenType::Identifier {
                                 name: nextchars2.iter().collect(),
                             });
+                            identifiers.push(nextchars2.iter().collect());
                         } else {
                             panic!("somewhere your forgor to put identifier for a char");
                         }
@@ -206,6 +213,7 @@ impl Lexer {
                             tokens.push(TokenType::Identifier {
                                 name: nextchars2.iter().collect(),
                             });
+                            identifiers.push(nextchars2.iter().collect());
                         } else {
                             panic!("somewhere your forgor to put identifier for a uint");
                         }
@@ -234,6 +242,7 @@ impl Lexer {
                             tokens.push(TokenType::Identifier {
                                 name: nextchars2.iter().collect(),
                             });
+                            identifiers.push(nextchars2.iter().collect());
                         } else {
                             panic!("somewhere your forgor to put identifier for a float");
                         }
@@ -351,11 +360,11 @@ impl Lexer {
                 '}' => {
                     tokens.push(TokenType::Rbrack);
                 }
-                _ => (),
+                _ => ()
             }
             self.counter += 1;
         }
-        print!("{:?}", tokens);
+        print!("{:?} found:{} identifiers", tokens,identifiers.len());
         tokens
     }
     fn get_current_char(&self) -> char {
@@ -370,9 +379,21 @@ impl Lexer {
             }
         }
     }
-    pub fn peek_next_token(&self) -> char {
+    fn peek_next_token(&self) -> char {
         let counter = &self.counter + 1;
         let cc: char = self.contents[counter];
         return cc;
+    }
+    pub fn get_identifiers(tokens:Vec<TokenType>) -> Vec<String> {
+        let mut identifiers:Vec<String> = Vec::new();
+        for token in tokens {
+            match token {
+                TokenType::Identifier{name} => {
+                    identifiers.push(name);
+                },
+                _ => (),
+            }
+        }
+        identifiers
     }
 }

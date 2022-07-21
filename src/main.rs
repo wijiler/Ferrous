@@ -4,7 +4,7 @@ use std::{env, fs, process};
 pub mod error;
 pub mod lexer;
 pub mod parser;
-pub mod ast;
+pub mod parserutil;
 pub mod token;
 // args handler so you can use the thing
 fn main() {

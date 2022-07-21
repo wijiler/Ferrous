@@ -49,4 +49,8 @@ pub enum TokenType {
     SemiColon,
     Colon,
     Comma,
+
+    // calls/refrences
+    Call { ident:String },
+    Reference { ident:String },
 }
