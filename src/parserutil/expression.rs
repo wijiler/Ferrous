@@ -1,11 +1,17 @@
-// can I get some of dat bt-7274-ussy
+#[derive(Debug,Clone)]
 pub enum Operations{
     Plus,
     Minus,
     Divide,
     Multiply,
 }
- 
+/// credits to Eskpill for this argument and call code. https://github.com/Eskpil 
+#[derive(Debug,Clone)]
+pub struct Argument {
+    value:Expr,
+    name:String,
+}
+#[derive(Debug,Clone)]
 pub enum Expr {
     Int(i64),
     UnaryExpr {
@@ -17,7 +23,10 @@ pub enum Expr {
         lhs:Box<Expr>,
         rhs:Box<Expr>
     },
-    StrL(String),
+    StrLiteral(String),
     Ident(String),
-
+    Bool(bool),
+    Literal(i64),
+    Call{func:String,args:Vec<Argument>},
+    NLookup{ name:String,value:String }
 }
