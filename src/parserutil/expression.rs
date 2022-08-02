@@ -11,6 +11,7 @@ pub struct Argument {
     value:Expr,
     name:String,
 }
+/// Ferriclang expressions
 #[derive(Debug,Clone)]
 pub enum Expr {
     Int(i64),
@@ -29,4 +30,15 @@ pub enum Expr {
     Literal(i64),
     Call{func:String,args:Vec<Argument>},
     NLookup{ name:String,value:String }
+}
+impl Argument {
+    pub fn new (v:Expr,n:String) -> Self {
+        Self {
+            value:v,
+            name:n,
+        }
+    }
+}
+impl Expr {
+ 
 }
