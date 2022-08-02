@@ -1,10 +1,8 @@
 /// ferriclang's first line :)
 use std::{env, fs, process};
 #[macro_use]
-pub mod error;
 pub mod lexer;
 pub mod parser;
-pub mod parserutil;
 pub mod token;
 // args handler so you can use the thing
 fn main() {
