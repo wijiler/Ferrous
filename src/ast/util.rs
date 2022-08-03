@@ -35,7 +35,20 @@ impl fmt::Display for Ast {
         writeln!(f,"{}",format!("|
                                 {}",child.value))?;
         }
-        else {}
+        else {
+            writeln!(f,"{}", format!("/\\
+                                  {:?}   {:?}",node.children.to_vec()[0],node.children.to_vec()[1]))?; 
+        }
+        for childchild in &child.children {
+        if child.children.to_vec().len() == 1 {
+        writeln!(f,"{}",format!("|
+{}",childchild.value))?;
+        }
+        else {
+            writeln!(f,"{}", format!("/\\
+{:?}   {:?}",child.children.to_vec()[0],child.children.to_vec()[1]))?; 
+        }
+        }
     }
        }
        Ok(())  
