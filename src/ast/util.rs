@@ -29,12 +29,14 @@ pub struct Ast {
 impl fmt::Display for Ast {
      fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
        for node in self.tree.to_vec(){
-           writeln!(f,"{}", node.value);
-           for child in node.children {
-               if node.children.to_vec().len() == 1 {
-               }
-           }
-           //writeln!(f,"{}",format!("{}",node.value)) 
+           writeln!(f,"{}", node.value)?;
+        for child in node.children.to_vec() {
+        if node.children.to_vec().len() == 1 {
+        writeln!(f,"{}",format!("|
+                                {}",child.value))?;
+        }
+        else {}
+    }
        }
        Ok(())  
      }

@@ -1,10 +1,10 @@
-/// ferriclang's first line :)
+/// ferrous's first line :)
 use std::{env, fs, process};
 #[macro_use]
 pub mod lexer;
 pub mod parser;
 pub mod token;
-pub mod ast; // cant call them both parser
+pub mod ast;
 // args handler so you can use the thing
 fn main() {
     let args: Vec<String> = env::args().collect();
