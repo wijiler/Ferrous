@@ -3,5 +3,5 @@ func sayWhatGilbertIs(String Something) {
 	printnl(Something);
 }
 func main !! () {
-sayWhatGilbertIs();
+sayWhatGilbertIs("senk");
 }
