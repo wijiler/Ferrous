@@ -1,5 +1,4 @@
 use token::TokenType;
-use std::fmt;
 #[derive(Debug,Clone)]
 pub struct Parser {
    tokens:Vec<TokenType>, 
@@ -18,39 +17,42 @@ impl Parser {
         self.tokens.to_vec().into_iter().next().unwrap()
     }
 }
-#[derive(Debug,Clone)]
 pub struct Astnode {
     value:String,     
     children:Vec<Astnode>,
 }
 pub struct Ast {
-    tree:Vec<Astnode>
+    tree:Astnode
 }
-impl fmt::Display for Ast {
-     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-       for node in self.tree.to_vec(){
-           writeln!(f,"{}", node.value)?;
-        for child in node.children.to_vec() {
-        if node.children.to_vec().len() == 1 {
-        writeln!(f,"{}",format!("|
-                                {}",child.value))?;
-        }
-        else {
-            writeln!(f,"{}", format!("/\\
-                                  {:?}   {:?}",node.children.to_vec()[0],node.children.to_vec()[1]))?; 
-        }
-        for childchild in &child.children {
-        if child.children.to_vec().len() == 1 {
-        writeln!(f,"{}",format!("|
-{}",childchild.value))?;
-        }
-        else {
-            writeln!(f,"{}", format!("/\\
-{:?}   {:?}",child.children.to_vec()[0],child.children.to_vec()[1]))?; 
-        }
+fn getchildren<F: FnMut(&String)> (node:&Astnode,f: &mut F) {
+   let mut children:Vec<String> = Vec::new();
+   let closure = |x| x;
+   if node.children.len() >= 1 {
+       for child in &node.children {
+       let s = closure(&child.value);
+       children.push(s.to_string());
+       }
+       f(&(node.value.to_string() + " -> " + &children.join(",")));
+   }
+   for node in &node.children {
+       getchildren(node,f)
+   }
+}
+impl Astnode {
+    pub fn new (v:String,c:Vec<Astnode>) -> Self {
+       Self {
+           value:v,
+           children:c,
+       }
+    }
+}
+impl Ast {
+    pub fn new(t:Astnode) -> Self {
+        Self {
+            tree:t
         }
     }
-       }
-       Ok(())  
-     }
+    pub fn print(&self) {
+    getchildren(&self.tree,&mut |x| println!("{}",x)); 
+    }
 }

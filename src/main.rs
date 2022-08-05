@@ -28,6 +28,13 @@ fn main() {
             let mut lexer = lexer::Lexer::new(file);
             lexer.lex();
         }
+        "--testast" | "-ta" => {
+            let ast = ast::util::Ast::new(ast::util::Astnode::new("Function".to_owned(),
+            vec![ast::util::Astnode::new("Identifier".to_owned(),
+            vec![ast::util::Astnode::new("test".to_owned(),vec![])]),
+            ast::util::Astnode::new("child2".to_owned(),vec![])]));
+            ast.print(); 
+        }
         _ => {}
     }
 }
