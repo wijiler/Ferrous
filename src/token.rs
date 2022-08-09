@@ -1,5 +1,5 @@
 #[allow(non_camel_case_types)]
-#[derive(Debug,Clone)]
+#[derive(Debug,Clone,PartialEq)]
 pub enum TokenType {
     // Gates
     Or,
@@ -7,7 +7,7 @@ pub enum TokenType {
     XOr,
     And,
     // literals/ident
-    Identifier { name: String },
+    Identifier(String),
     StringL { value: String },
     CharL { value: String },
     IntNumber { value: String },
