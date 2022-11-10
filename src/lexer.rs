@@ -40,7 +40,7 @@ impl Lexer {
                             tokens.push(TokenType::Identifier(nextchars2.iter().collect()));
                             identifiers.push(nextchars2.iter().collect());
                             } else {
-                            panic!("somewhere your forgor to put identifier for a function");
+                            panic!("somewhere your forgot to put identifier for a function");
                             }
                     } else {
                         continue;

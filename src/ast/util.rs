@@ -6,7 +6,7 @@ pub struct Astnode {
 pub struct Ast {
     tree:Astnode
 }
-fn printable<F: FnMut(&String)> (node:&Astnode,f: &mut F) {
+fn getChildren<F: FnMut(&String)> (node:&Astnode,f: &mut F) {
    let mut children:Vec<String> = Vec::new();
    let closure = |x| x;
    if node.children.len() >= 1 {
@@ -17,7 +17,7 @@ fn printable<F: FnMut(&String)> (node:&Astnode,f: &mut F) {
        f(&(node.value.to_string() + " -> " + &children.join(",")));
    }
    for node in &node.children {
-       printable(node,f)
+       getChildren(node,f);
    }
 }
 impl Astnode {
@@ -35,13 +35,19 @@ impl Ast {
         }
     }
     pub fn print(&self) {
-    printable(&self.tree,&mut |x| println!("{}",x)); 
+    getChildren(&self.tree,&mut |x| println!("{}",x)); 
     }
 }
 #[allow(unused_variables)] // here right now to stop warnings
-pub fn astgen (lexed:Vec<TokenType>) {
-    let mainnode:Astnode;
-    let ast:Ast;
-    let mut iter = lexed.into_iter();
-    let maintoken = iter.position(|x| x == TokenType::Main).to_owned(); // find the first Main token 
+pub fn astgen (lexed:Vec<TokenType>){
+    let mut mainnode:Astnode;
+    let mut ast:Ast;
+    let mut iter = lexed.iter();
+    let maintoken = iter.position(|x| x == &TokenType::Main).unwrap(); // find the first Main token 
+    let mainident:String;
+    // work around so I can get the string I want
+    match &lexed[maintoken - 1 as usize].to_owned() {
+        TokenType::Identifier(i) => mainident = i.to_owned(), 
+        _ => ()
+    }
 }
