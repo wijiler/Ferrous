@@ -26,7 +26,7 @@ fn main() {
             let file = fs::read_to_string(filename).unwrap();
             //        file.retain(|c| !c.is_whitespace());
             let mut lexer = lexer::Lexer::new(file);
-            lexer.lex();
+            let lexed = lexer.lex();
         }
         "--testast" | "-ta" => {
             let ast = ast::util::Ast::new(ast::util::Astnode::new("Function".to_owned(),
@@ -45,7 +45,7 @@ fn version() {
         "{}",
         format!(
             r"
-your ferric version {}
+Ferrous version: {}
                  ",
             VERSION.unwrap_or("unknow ver")
         )

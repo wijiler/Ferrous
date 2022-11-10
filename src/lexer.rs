@@ -1,6 +1,6 @@
 use crate::token::*;
 //use std::{fs::File, io::Write};
-/// token system by me lexer is credited to https://www.youtube.com/channel/UCK6-JHDgbdeXbnTwc2Lj98g
+/// token system by me lexer (atleast some of it) is credited to https://www.youtube.com/channel/UCK6-JHDgbdeXbnTwc2Lj98g
 pub struct Lexer {
     contents: Vec<char>,
     counter: usize,

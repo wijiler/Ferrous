@@ -1,22 +1,4 @@
-use token::TokenType;
-#[derive(Debug,Clone)]
-pub struct Parser {
-   tokens:Vec<TokenType>, 
-}
-
-impl Parser {
-    pub fn new (t:Vec<TokenType>) -> Self {
-        Self {
-            tokens:t
-        }
-    }
-    pub fn peek(&self) -> TokenType {
-        self.tokens.to_vec().into_iter().next().unwrap()
-    }  
-    pub fn nom (self) -> TokenType { // its the eat/consume function but I think its funnier to call it nom
-        self.tokens.to_vec().into_iter().next().unwrap()
-    }
-}
+use crate::token::TokenType;
 pub struct Astnode {
     value:String,     
     children:Vec<Astnode>,
@@ -24,7 +6,7 @@ pub struct Astnode {
 pub struct Ast {
     tree:Astnode
 }
-fn getchildren<F: FnMut(&String)> (node:&Astnode,f: &mut F) {
+fn printable<F: FnMut(&String)> (node:&Astnode,f: &mut F) {
    let mut children:Vec<String> = Vec::new();
    let closure = |x| x;
    if node.children.len() >= 1 {
@@ -35,7 +17,7 @@ fn getchildren<F: FnMut(&String)> (node:&Astnode,f: &mut F) {
        f(&(node.value.to_string() + " -> " + &children.join(",")));
    }
    for node in &node.children {
-       getchildren(node,f)
+       printable(node,f)
    }
 }
 impl Astnode {
@@ -53,6 +35,13 @@ impl Ast {
         }
     }
     pub fn print(&self) {
-    getchildren(&self.tree,&mut |x| println!("{}",x)); 
+    printable(&self.tree,&mut |x| println!("{}",x)); 
     }
+}
+#[allow(unused_variables)] // here right now to stop warnings
+pub fn astgen (lexed:Vec<TokenType>) {
+    let mainnode:Astnode;
+    let ast:Ast;
+    let mut iter = lexed.into_iter();
+    let maintoken = iter.position(|x| x == TokenType::Main).to_owned(); // find the first Main token 
 }
