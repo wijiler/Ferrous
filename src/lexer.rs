@@ -1,6 +1,6 @@
 use crate::token::*;
 //use std::{fs::File, io::Write};
-/// token system by me lexer (atleast some of it) is credited to https://www.youtube.com/channel/UCK6-JHDgbdeXbnTwc2Lj98g
+/// token system by me. lexer (atleast some of it) is credited to https://www.youtube.com/channel/UCK6-JHDgbdeXbnTwc2Lj98g
 pub struct Lexer {
     contents: Vec<char>,
     counter: usize,
@@ -17,6 +17,12 @@ impl Lexer {
         let clength = self.contents.len();
         let mut tokens: Vec<TokenType> = Vec::new();
         let mut identifiers: Vec<String> = Vec::new();
+        fn parsetoargs (t:Vec<TokenType>) {
+            let mut i:Vec<TokenType>;
+           for TokenType::Rparen in t {
+               
+           }
+        }
         while self.counter < clength {
             match self.get_current_char() {
                 'f' => {

@@ -1,7 +1,5 @@
 // discard this please
-func sayWhatGilbertIs(String Something) {
-	printnl(Something);
-}
 func main !! () {
-sayWhatGilbertIs("senk");
+sayWhatGilbertIs("snek");
 }
+

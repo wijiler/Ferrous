@@ -2,7 +2,6 @@
 use std::{env, fs, process};
 #[macro_use]
 pub mod lexer;
-pub mod parser;
 pub mod token;
 pub mod ast;
 // args handler so you can use the thing

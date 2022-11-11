@@ -51,7 +51,8 @@ pub enum TokenType {
     Colon,
     Comma,
 
-    // calls/refrences
+    // calls/refrences/arguments
     Call { ident:String },
     Reference { ident:String },
+    Args(Vec<TokenType>) 
 }

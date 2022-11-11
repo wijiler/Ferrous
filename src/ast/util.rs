@@ -40,14 +40,20 @@ impl Ast {
 }
 #[allow(unused_variables)] // here right now to stop warnings
 pub fn astgen (lexed:Vec<TokenType>){
-    let mut mainnode:Astnode;
-    let mut ast:Ast;
-    let mut iter = lexed.iter();
-    let maintoken = iter.position(|x| x == &TokenType::Main).unwrap(); // find the first Main token 
-    let mainident:String;
+// get mainnode
+let mainnode:Astnode;
+let ast:Ast;
+let mut iter = lexed.iter();
+let maintoken = iter.position(|x| x == &TokenType::Main).unwrap(); // find the first Main token 
+let mainident:String;
     // work around so I can get the string I want
     match &lexed[maintoken - 1 as usize].to_owned() {
         TokenType::Identifier(i) => mainident = i.to_owned(), 
         _ => ()
     }
+// functions should have 2 children, return:type and contents:Vec<Node>
+// parse everything after into children
+
+// TODO parse everything before into imports(not really but I dont know the word you would use to
+// call it maybe inserts?,just something that it can call or use)
 }

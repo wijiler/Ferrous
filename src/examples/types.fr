@@ -7,3 +7,4 @@ uInt lol = 123;
 char nair = 'n';
 Bool type = True;
 }
+func test (String test) {}
